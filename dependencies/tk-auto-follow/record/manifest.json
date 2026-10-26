@@ -1,0 +1,39 @@
+{
+  "version": 2,
+  "uuid": "730f9dd7-07cf-40b3-aabf-ca7f453c955c",
+  "name": "批量自动关注",
+  "description": "根据用户主页自动关注指定用户",
+  "deviceType": "browser",
+  "socialCategoryId": 3,
+  "deviceId": 0,
+  "createdAt": 1792485192,
+  "updatedAt": 1792721829,
+  "routes": [
+    {
+      "index": 1,
+      "routeId": "17b8a7a5-c94d-4d2a-8b98-7ed7a8aaeeb1",
+      "name": "指定用户主页批量自动关注",
+      "description": "",
+      "entryUrl": "https://www.tiktok.com/@soshitaislam",
+      "steps": [
+        {
+          "index": 1,
+          "stepId": "813cdd97-b738-473c-b914-eb73f0a2ca19",
+          "title": "批量自动关注",
+          "description": "根据用户主页自动关注",
+          "capturedAt": 1792485296,
+          "screenshot": "routes/001/steps/001/screenshot.png",
+          "annotatedScreenshot": "routes/001/steps/001/annotated.png",
+          "markup": "routes/001/steps/001/markup.json",
+          "meta": {
+            "browser": {
+              "url": "https://www.tiktok.com/@soshitaislam",
+              "title": "(99+)শশী (@soshitaislam) | TikTok",
+              "pagePath": "routes/001/steps/001/page.html"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

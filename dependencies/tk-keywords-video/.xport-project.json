@@ -1,0 +1,34 @@
+{
+  "format": "xport-github-project",
+  "formatVersion": 1,
+  "kind": "automation",
+  "exportedAt": 1792983536,
+  "project": {
+    "label": "tk-keywords-video",
+    "name": "TikTok关键词采集视频链接",
+    "target": "browser",
+    "version": "1.1.1"
+  },
+  "deviceTargets": [
+    "browser",
+    "android",
+    "ios"
+  ],
+  "socialCategory": {
+    "sourceId": 3,
+    "sourceUid": 0,
+    "name": "TikTok",
+    "icon": "social/797b7eaf-118d-4399-aaf2-c23c826396b2.svg",
+    "websiteDomain": "https://www.tiktok.com",
+    "androidPackage": "com.zhiliaoapp.musically",
+    "iosPackage": "com.zhiliaoapp.musically"
+  },
+  "record": {
+    "uuid": "d4657ad1-e3b7-4b12-8a1c-c007d11566b4",
+    "name": "TikTok关键词采集视频链接",
+    "description": "",
+    "deviceType": "browser",
+    "updateAt": 1792721833,
+    "contentMd5": "dcbb3bda02d3693aabc2102d5090505b"
+  }
+}

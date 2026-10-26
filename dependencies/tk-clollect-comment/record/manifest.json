@@ -1,0 +1,56 @@
+{
+  "version": 2,
+  "uuid": "779ec6a3-bd4b-4ed8-b9b2-67e1d8533eb0",
+  "name": "TikTok采集视频评论",
+  "description": "",
+  "deviceType": "browser",
+  "socialCategoryId": 3,
+  "deviceId": 0,
+  "createdAt": 1792484068,
+  "updatedAt": 1792721831,
+  "routes": [
+    {
+      "index": 1,
+      "routeId": "236a6e1e-8e69-4066-a10e-c556e3a4286f",
+      "name": "tk采集视频评论",
+      "description": "",
+      "entryUrl": "https://www.tiktok.com/@maybemay161/video/7680653388262001934",
+      "steps": [
+        {
+          "index": 1,
+          "stepId": "ad22e9f0-3ec3-439d-862b-d55426a9a573",
+          "title": "打开链接，点击评论",
+          "description": "",
+          "capturedAt": 1792484199,
+          "screenshot": "routes/001/steps/001/screenshot.png",
+          "annotatedScreenshot": "routes/001/steps/001/annotated.png",
+          "markup": "routes/001/steps/001/markup.json",
+          "meta": {
+            "browser": {
+              "url": "https://www.tiktok.com/@maybemay161/video/7680653388262001934",
+              "title": "maybe may: short playful video caption | TikTok",
+              "pagePath": "routes/001/steps/001/page.html"
+            }
+          }
+        },
+        {
+          "index": 2,
+          "stepId": "6a944283-150c-42f8-a6e2-32a01cd3ad07",
+          "title": "采集数据",
+          "description": "把评论用户的主页链接、名字、评论内容和评论日期采集下来，下滑全采集",
+          "capturedAt": 1792484285,
+          "screenshot": "routes/001/steps/002/screenshot.png",
+          "annotatedScreenshot": "routes/001/steps/002/annotated.png",
+          "markup": "routes/001/steps/002/markup.json",
+          "meta": {
+            "browser": {
+              "url": "https://www.tiktok.com/@maybemay161/video/7680653388262001934",
+              "title": "(99+)maybe may: short playful video caption | TikTok",
+              "pagePath": "routes/001/steps/002/page.html"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

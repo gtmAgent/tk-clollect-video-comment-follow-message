@@ -1,0 +1,865 @@
+{
+  "name": "tk-clollect-video-comment-follow-message",
+  "version": "1.1.6",
+  "private": true,
+  "type": "module",
+  "displayName": {
+    "en_US": "Tk关键词视频+筛选评论+关注私信",
+    "de_DE": "Tk关键词视频+筛选评论+关注私信",
+    "es_ES": "Tk关键词视频+筛选评论+关注私信",
+    "fr_FR": "Tk关键词视频+筛选评论+关注私信",
+    "id_ID": "Tk关键词视频+筛选评论+关注私信",
+    "ja_JP": "Tk关键词视频+筛选评论+关注私信",
+    "ko_KR": "Tk关键词视频+筛选评论+关注私信",
+    "ms_MY": "Tk关键词视频+筛选评论+关注私信",
+    "pt_BR": "Tk关键词视频+筛选评论+关注私信",
+    "ru_RU": "Tk关键词视频+筛选评论+关注私信",
+    "th_TH": "Tk关键词视频+筛选评论+关注私信",
+    "vi_VN": "Tk关键词视频+筛选评论+关注私信",
+    "zh_CN": "Tk关键词视频+筛选评论+关注私信",
+    "zh_TW": "Tk关键词视频+筛选评论+关注私信"
+  },
+  "description": {
+    "en_US": "Collect TikTok videos by keyword, filter and confirm, then loop comment scrape with dedupe, confirm users, follow and DM until you stop.",
+    "zh_CN": "按关键词采集视频并筛选确认，循环采集评论（主页去重）、筛选确认用户后关注并私信，直到你取消。",
+    "zh_TW": "按關鍵詞採集影片並篩選確認，循環採集評論（主頁去重）、篩選確認用戶後關注並私信，直到你取消。",
+    "ja_JP": "Collect TikTok videos by keyword, filter and confirm, then loop comment scrape with dedupe, confirm users, follow and DM until you stop.",
+    "ko_KR": "Collect TikTok videos by keyword, filter and confirm, then loop comment scrape with dedupe, confirm users, follow and DM until you stop.",
+    "th_TH": "Collect TikTok videos by keyword, filter and confirm, then loop comment scrape with dedupe, confirm users, follow and DM until you stop.",
+    "id_ID": "Collect TikTok videos by keyword, filter and confirm, then loop comment scrape with dedupe, confirm users, follow and DM until you stop.",
+    "ms_MY": "Collect TikTok videos by keyword, filter and confirm, then loop comment scrape with dedupe, confirm users, follow and DM until you stop.",
+    "vi_VN": "Collect TikTok videos by keyword, filter and confirm, then loop comment scrape with dedupe, confirm users, follow and DM until you stop.",
+    "de_DE": "Collect TikTok videos by keyword, filter and confirm, then loop comment scrape with dedupe, confirm users, follow and DM until you stop.",
+    "es_ES": "Collect TikTok videos by keyword, filter and confirm, then loop comment scrape with dedupe, confirm users, follow and DM until you stop.",
+    "pt_BR": "Collect TikTok videos by keyword, filter and confirm, then loop comment scrape with dedupe, confirm users, follow and DM until you stop.",
+    "fr_FR": "Collect TikTok videos by keyword, filter and confirm, then loop comment scrape with dedupe, confirm users, follow and DM until you stop.",
+    "ru_RU": "Collect TikTok videos by keyword, filter and confirm, then loop comment scrape with dedupe, confirm users, follow and DM until you stop."
+  },
+  "main": "./main.ts",
+  "dependencies": {
+    "xport-workflow-sdk": "file:../xport_workflow_sdk"
+  },
+  "engines": {
+    "bun": ">=1.4.0"
+  },
+  "devDependencies": {
+    "bun-types": "^1.4.2"
+  },
+  "xportWorkflow": {
+    "workflowRunConfig": [
+      {
+        "title": {
+          "en_US": "Search & browsers",
+          "zh_CN": "搜索与浏览器",
+          "zh_TW": "搜尋與瀏覽器",
+          "ja_JP": "Search & browsers",
+          "ko_KR": "Search & browsers",
+          "th_TH": "Search & browsers",
+          "id_ID": "Search & browsers",
+          "ms_MY": "Search & browsers",
+          "vi_VN": "Search & browsers",
+          "de_DE": "Search & browsers",
+          "es_ES": "Search & browsers",
+          "pt_BR": "Search & browsers",
+          "fr_FR": "Search & browsers",
+          "ru_RU": "Search & browsers"
+        },
+        "fields": [
+          {
+            "key": "keywords",
+            "type": "text",
+            "label": {
+              "en_US": "Search keywords",
+              "zh_CN": "搜索关键词",
+              "zh_TW": "搜尋關鍵詞",
+              "ja_JP": "Search keywords",
+              "ko_KR": "Search keywords",
+              "th_TH": "Search keywords",
+              "id_ID": "Search keywords",
+              "ms_MY": "Search keywords",
+              "vi_VN": "Search keywords",
+              "de_DE": "Search keywords",
+              "es_ES": "Search keywords",
+              "pt_BR": "Search keywords",
+              "fr_FR": "Search keywords",
+              "ru_RU": "Search keywords"
+            },
+            "hint": {
+              "en_US": "One keyword per line",
+              "zh_CN": "每行一个关键词",
+              "zh_TW": "每行一個關鍵詞",
+              "ja_JP": "One keyword per line",
+              "ko_KR": "One keyword per line",
+              "th_TH": "One keyword per line",
+              "id_ID": "One keyword per line",
+              "ms_MY": "One keyword per line",
+              "vi_VN": "One keyword per line",
+              "de_DE": "One keyword per line",
+              "es_ES": "One keyword per line",
+              "pt_BR": "One keyword per line",
+              "fr_FR": "One keyword per line",
+              "ru_RU": "One keyword per line"
+            },
+            "multiline": true,
+            "maxLines": 5,
+            "defaultValue": ""
+          },
+          {
+            "key": "collectCount",
+            "type": "text",
+            "label": {
+              "en_US": "Videos per keyword",
+              "zh_CN": "每个关键词采集条数",
+              "zh_TW": "每個關鍵詞採集條數",
+              "ja_JP": "Videos per keyword",
+              "ko_KR": "Videos per keyword",
+              "th_TH": "Videos per keyword",
+              "id_ID": "Videos per keyword",
+              "ms_MY": "Videos per keyword",
+              "vi_VN": "Videos per keyword",
+              "de_DE": "Videos per keyword",
+              "es_ES": "Videos per keyword",
+              "pt_BR": "Videos per keyword",
+              "fr_FR": "Videos per keyword",
+              "ru_RU": "Videos per keyword"
+            },
+            "inputType": "number",
+            "defaultValue": 20
+          },
+          {
+            "key": "browsers",
+            "type": "browser",
+            "label": {
+              "en_US": "Browsers",
+              "zh_CN": "执行浏览器",
+              "zh_TW": "執行瀏覽器",
+              "ja_JP": "Browsers",
+              "ko_KR": "Browsers",
+              "th_TH": "Browsers",
+              "id_ID": "Browsers",
+              "ms_MY": "Browsers",
+              "vi_VN": "Browsers",
+              "de_DE": "Browsers",
+              "es_ES": "Browsers",
+              "pt_BR": "Browsers",
+              "fr_FR": "Browsers",
+              "ru_RU": "Browsers"
+            },
+            "hint": {
+              "en_US": "Select logged-in TikTok browsers that will run this workflow",
+              "zh_CN": "选择已登录 TikTok、用于执行本工作流的浏览器",
+              "zh_TW": "選擇已登入 TikTok、用於執行本工作流的瀏覽器",
+              "ja_JP": "Select logged-in TikTok browsers that will run this workflow",
+              "ko_KR": "Select logged-in TikTok browsers that will run this workflow",
+              "th_TH": "Select logged-in TikTok browsers that will run this workflow",
+              "id_ID": "Select logged-in TikTok browsers that will run this workflow",
+              "ms_MY": "Select logged-in TikTok browsers that will run this workflow",
+              "vi_VN": "Select logged-in TikTok browsers that will run this workflow",
+              "de_DE": "Select logged-in TikTok browsers that will run this workflow",
+              "es_ES": "Select logged-in TikTok browsers that will run this workflow",
+              "pt_BR": "Select logged-in TikTok browsers that will run this workflow",
+              "fr_FR": "Select logged-in TikTok browsers that will run this workflow",
+              "ru_RU": "Select logged-in TikTok browsers that will run this workflow"
+            },
+            "single": false,
+            "platform": "tiktok",
+            "defaultValue": []
+          }
+        ]
+      },
+      {
+        "title": {
+          "en_US": "Video filter",
+          "zh_CN": "视频筛选",
+          "zh_TW": "影片篩選",
+          "ja_JP": "Video filter",
+          "ko_KR": "Video filter",
+          "th_TH": "Video filter",
+          "id_ID": "Video filter",
+          "ms_MY": "Video filter",
+          "vi_VN": "Video filter",
+          "de_DE": "Video filter",
+          "es_ES": "Video filter",
+          "pt_BR": "Video filter",
+          "fr_FR": "Video filter",
+          "ru_RU": "Video filter"
+        },
+        "fields": [
+          {
+            "key": "videoFilterKeywords",
+            "type": "text",
+            "label": {
+              "en_US": "Video filter keywords",
+              "zh_CN": "视频筛选关键词",
+              "zh_TW": "影片篩選關鍵詞",
+              "ja_JP": "Video filter keywords",
+              "ko_KR": "Video filter keywords",
+              "th_TH": "Video filter keywords",
+              "id_ID": "Video filter keywords",
+              "ms_MY": "Video filter keywords",
+              "vi_VN": "Video filter keywords",
+              "de_DE": "Video filter keywords",
+              "es_ES": "Video filter keywords",
+              "pt_BR": "Video filter keywords",
+              "fr_FR": "Video filter keywords",
+              "ru_RU": "Video filter keywords"
+            },
+            "hint": {
+              "en_US": "Match anywhere in each video row; commas or new lines",
+              "zh_CN": "在视频行全文中匹配；逗号或换行分隔",
+              "zh_TW": "在影片列全文中匹配；逗號或換行分隔",
+              "ja_JP": "Match anywhere in each video row; commas or new lines",
+              "ko_KR": "Match anywhere in each video row; commas or new lines",
+              "th_TH": "Match anywhere in each video row; commas or new lines",
+              "id_ID": "Match anywhere in each video row; commas or new lines",
+              "ms_MY": "Match anywhere in each video row; commas or new lines",
+              "vi_VN": "Match anywhere in each video row; commas or new lines",
+              "de_DE": "Match anywhere in each video row; commas or new lines",
+              "es_ES": "Match anywhere in each video row; commas or new lines",
+              "pt_BR": "Match anywhere in each video row; commas or new lines",
+              "fr_FR": "Match anywhere in each video row; commas or new lines",
+              "ru_RU": "Match anywhere in each video row; commas or new lines"
+            },
+            "multiline": true,
+            "maxLines": 5,
+            "defaultValue": ""
+          },
+          {
+            "key": "videoPublishStart",
+            "type": "dateTime",
+            "label": {
+              "en_US": "Video publish from",
+              "zh_CN": "视频发布时间起",
+              "zh_TW": "影片發布時間起",
+              "ja_JP": "Video publish from",
+              "ko_KR": "Video publish from",
+              "th_TH": "Video publish from",
+              "id_ID": "Video publish from",
+              "ms_MY": "Video publish from",
+              "vi_VN": "Video publish from",
+              "de_DE": "Video publish from",
+              "es_ES": "Video publish from",
+              "pt_BR": "Video publish from",
+              "fr_FR": "Video publish from",
+              "ru_RU": "Video publish from"
+            },
+            "hint": {
+              "en_US": "Optional",
+              "zh_CN": "可选",
+              "zh_TW": "可選",
+              "ja_JP": "Optional",
+              "ko_KR": "Optional",
+              "th_TH": "Optional",
+              "id_ID": "Optional",
+              "ms_MY": "Optional",
+              "vi_VN": "Optional",
+              "de_DE": "Optional",
+              "es_ES": "Optional",
+              "pt_BR": "Optional",
+              "fr_FR": "Optional",
+              "ru_RU": "Optional"
+            }
+          },
+          {
+            "key": "videoPublishEnd",
+            "type": "dateTime",
+            "label": {
+              "en_US": "Video publish to",
+              "zh_CN": "视频发布时间止",
+              "zh_TW": "影片發布時間止",
+              "ja_JP": "Video publish to",
+              "ko_KR": "Video publish to",
+              "th_TH": "Video publish to",
+              "id_ID": "Video publish to",
+              "ms_MY": "Video publish to",
+              "vi_VN": "Video publish to",
+              "de_DE": "Video publish to",
+              "es_ES": "Video publish to",
+              "pt_BR": "Video publish to",
+              "fr_FR": "Video publish to",
+              "ru_RU": "Video publish to"
+            },
+            "hint": {
+              "en_US": "Optional",
+              "zh_CN": "可选",
+              "zh_TW": "可選",
+              "ja_JP": "Optional",
+              "ko_KR": "Optional",
+              "th_TH": "Optional",
+              "id_ID": "Optional",
+              "ms_MY": "Optional",
+              "vi_VN": "Optional",
+              "de_DE": "Optional",
+              "es_ES": "Optional",
+              "pt_BR": "Optional",
+              "fr_FR": "Optional",
+              "ru_RU": "Optional"
+            }
+          },
+          {
+            "key": "videoLikeMin",
+            "type": "text",
+            "label": {
+              "en_US": "Min likes",
+              "zh_CN": "点赞最少",
+              "zh_TW": "按讚最少",
+              "ja_JP": "Min likes",
+              "ko_KR": "Min likes",
+              "th_TH": "Min likes",
+              "id_ID": "Min likes",
+              "ms_MY": "Min likes",
+              "vi_VN": "Min likes",
+              "de_DE": "Min likes",
+              "es_ES": "Min likes",
+              "pt_BR": "Min likes",
+              "fr_FR": "Min likes",
+              "ru_RU": "Min likes"
+            },
+            "hint": {
+              "en_US": "Optional; e.g. 100",
+              "zh_CN": "可选，例如 100",
+              "zh_TW": "可選，例如 100",
+              "ja_JP": "Optional; e.g. 100",
+              "ko_KR": "Optional; e.g. 100",
+              "th_TH": "Optional; e.g. 100",
+              "id_ID": "Optional; e.g. 100",
+              "ms_MY": "Optional; e.g. 100",
+              "vi_VN": "Optional; e.g. 100",
+              "de_DE": "Optional; e.g. 100",
+              "es_ES": "Optional; e.g. 100",
+              "pt_BR": "Optional; e.g. 100",
+              "fr_FR": "Optional; e.g. 100",
+              "ru_RU": "Optional; e.g. 100"
+            },
+            "inputType": "number",
+            "defaultValue": ""
+          },
+          {
+            "key": "videoLikeMax",
+            "type": "text",
+            "label": {
+              "en_US": "Max likes",
+              "zh_CN": "点赞最多",
+              "zh_TW": "按讚最多",
+              "ja_JP": "Max likes",
+              "ko_KR": "Max likes",
+              "th_TH": "Max likes",
+              "id_ID": "Max likes",
+              "ms_MY": "Max likes",
+              "vi_VN": "Max likes",
+              "de_DE": "Max likes",
+              "es_ES": "Max likes",
+              "pt_BR": "Max likes",
+              "fr_FR": "Max likes",
+              "ru_RU": "Max likes"
+            },
+            "hint": {
+              "en_US": "Optional; e.g. 100000",
+              "zh_CN": "可选，例如 100000",
+              "zh_TW": "可選，例如 100000",
+              "ja_JP": "Optional; e.g. 100000",
+              "ko_KR": "Optional; e.g. 100000",
+              "th_TH": "Optional; e.g. 100000",
+              "id_ID": "Optional; e.g. 100000",
+              "ms_MY": "Optional; e.g. 100000",
+              "vi_VN": "Optional; e.g. 100000",
+              "de_DE": "Optional; e.g. 100000",
+              "es_ES": "Optional; e.g. 100000",
+              "pt_BR": "Optional; e.g. 100000",
+              "fr_FR": "Optional; e.g. 100000",
+              "ru_RU": "Optional; e.g. 100000"
+            },
+            "inputType": "number",
+            "defaultValue": ""
+          }
+        ]
+      },
+      {
+        "title": {
+          "en_US": "Comments",
+          "zh_CN": "评论采集与筛选",
+          "zh_TW": "評論採集與篩選",
+          "ja_JP": "Comments",
+          "ko_KR": "Comments",
+          "th_TH": "Comments",
+          "id_ID": "Comments",
+          "ms_MY": "Comments",
+          "vi_VN": "Comments",
+          "de_DE": "Comments",
+          "es_ES": "Comments",
+          "pt_BR": "Comments",
+          "fr_FR": "Comments",
+          "ru_RU": "Comments"
+        },
+        "fields": [
+          {
+            "key": "maxComments",
+            "type": "text",
+            "label": {
+              "en_US": "Max comments per video",
+              "zh_CN": "每视频最多采集评论数",
+              "zh_TW": "每影片最多採集評論數",
+              "ja_JP": "Max comments per video",
+              "ko_KR": "Max comments per video",
+              "th_TH": "Max comments per video",
+              "id_ID": "Max comments per video",
+              "ms_MY": "Max comments per video",
+              "vi_VN": "Max comments per video",
+              "de_DE": "Max comments per video",
+              "es_ES": "Max comments per video",
+              "pt_BR": "Max comments per video",
+              "fr_FR": "Max comments per video",
+              "ru_RU": "Max comments per video"
+            },
+            "inputType": "number",
+            "defaultValue": 100
+          },
+          {
+            "key": "commentFilterKeywords",
+            "type": "text",
+            "label": {
+              "en_US": "Comment filter keywords",
+              "zh_CN": "评论筛选关键词",
+              "zh_TW": "評論篩選關鍵詞",
+              "ja_JP": "Comment filter keywords",
+              "ko_KR": "Comment filter keywords",
+              "th_TH": "Comment filter keywords",
+              "id_ID": "Comment filter keywords",
+              "ms_MY": "Comment filter keywords",
+              "vi_VN": "Comment filter keywords",
+              "de_DE": "Comment filter keywords",
+              "es_ES": "Comment filter keywords",
+              "pt_BR": "Comment filter keywords",
+              "fr_FR": "Comment filter keywords",
+              "ru_RU": "Comment filter keywords"
+            },
+            "hint": {
+              "en_US": "Match in comment rows; commas or new lines",
+              "zh_CN": "在评论行全文中匹配；逗号或换行分隔",
+              "zh_TW": "在評論列全文中匹配；逗號或換行分隔",
+              "ja_JP": "Match in comment rows; commas or new lines",
+              "ko_KR": "Match in comment rows; commas or new lines",
+              "th_TH": "Match in comment rows; commas or new lines",
+              "id_ID": "Match in comment rows; commas or new lines",
+              "ms_MY": "Match in comment rows; commas or new lines",
+              "vi_VN": "Match in comment rows; commas or new lines",
+              "de_DE": "Match in comment rows; commas or new lines",
+              "es_ES": "Match in comment rows; commas or new lines",
+              "pt_BR": "Match in comment rows; commas or new lines",
+              "fr_FR": "Match in comment rows; commas or new lines",
+              "ru_RU": "Match in comment rows; commas or new lines"
+            },
+            "multiline": true,
+            "maxLines": 5,
+            "defaultValue": ""
+          },
+          {
+            "key": "commentPublishStart",
+            "type": "dateTime",
+            "label": {
+              "en_US": "Comment time from",
+              "zh_CN": "评论时间起",
+              "zh_TW": "評論時間起",
+              "ja_JP": "Comment time from",
+              "ko_KR": "Comment time from",
+              "th_TH": "Comment time from",
+              "id_ID": "Comment time from",
+              "ms_MY": "Comment time from",
+              "vi_VN": "Comment time from",
+              "de_DE": "Comment time from",
+              "es_ES": "Comment time from",
+              "pt_BR": "Comment time from",
+              "fr_FR": "Comment time from",
+              "ru_RU": "Comment time from"
+            },
+            "hint": {
+              "en_US": "Optional",
+              "zh_CN": "可选",
+              "zh_TW": "可選",
+              "ja_JP": "Optional",
+              "ko_KR": "Optional",
+              "th_TH": "Optional",
+              "id_ID": "Optional",
+              "ms_MY": "Optional",
+              "vi_VN": "Optional",
+              "de_DE": "Optional",
+              "es_ES": "Optional",
+              "pt_BR": "Optional",
+              "fr_FR": "Optional",
+              "ru_RU": "Optional"
+            }
+          },
+          {
+            "key": "commentPublishEnd",
+            "type": "dateTime",
+            "label": {
+              "en_US": "Comment time to",
+              "zh_CN": "评论时间止",
+              "zh_TW": "評論時間止",
+              "ja_JP": "Comment time to",
+              "ko_KR": "Comment time to",
+              "th_TH": "Comment time to",
+              "id_ID": "Comment time to",
+              "ms_MY": "Comment time to",
+              "vi_VN": "Comment time to",
+              "de_DE": "Comment time to",
+              "es_ES": "Comment time to",
+              "pt_BR": "Comment time to",
+              "fr_FR": "Comment time to",
+              "ru_RU": "Comment time to"
+            },
+            "hint": {
+              "en_US": "Optional",
+              "zh_CN": "可选",
+              "zh_TW": "可選",
+              "ja_JP": "Optional",
+              "ko_KR": "Optional",
+              "th_TH": "Optional",
+              "id_ID": "Optional",
+              "ms_MY": "Optional",
+              "vi_VN": "Optional",
+              "de_DE": "Optional",
+              "es_ES": "Optional",
+              "pt_BR": "Optional",
+              "fr_FR": "Optional",
+              "ru_RU": "Optional"
+            }
+          }
+        ]
+      },
+      {
+        "title": {
+          "en_US": "Follow & DM",
+          "zh_CN": "关注与私信",
+          "zh_TW": "關注與私信",
+          "ja_JP": "Follow & DM",
+          "ko_KR": "Follow & DM",
+          "th_TH": "Follow & DM",
+          "id_ID": "Follow & DM",
+          "ms_MY": "Follow & DM",
+          "vi_VN": "Follow & DM",
+          "de_DE": "Follow & DM",
+          "es_ES": "Follow & DM",
+          "pt_BR": "Follow & DM",
+          "fr_FR": "Follow & DM",
+          "ru_RU": "Follow & DM"
+        },
+        "fields": [
+          {
+            "key": "messages",
+            "type": "text",
+            "label": {
+              "en_US": "DM copy",
+              "zh_CN": "私信文案",
+              "zh_TW": "私信文案",
+              "ja_JP": "DM copy",
+              "ko_KR": "DM copy",
+              "th_TH": "DM copy",
+              "id_ID": "DM copy",
+              "ms_MY": "DM copy",
+              "vi_VN": "DM copy",
+              "de_DE": "DM copy",
+              "es_ES": "DM copy",
+              "pt_BR": "DM copy",
+              "fr_FR": "DM copy",
+              "ru_RU": "DM copy"
+            },
+            "hint": {
+              "en_US": "Multiple variants separated by ==sep==; each send picks one at random",
+              "zh_CN": "多条文案用 ==sep== 分隔；每次发送随机取一条",
+              "zh_TW": "多條文案用 ==sep== 分隔；每次發送隨機取一條",
+              "ja_JP": "Multiple variants separated by ==sep==; each send picks one at random",
+              "ko_KR": "Multiple variants separated by ==sep==; each send picks one at random",
+              "th_TH": "Multiple variants separated by ==sep==; each send picks one at random",
+              "id_ID": "Multiple variants separated by ==sep==; each send picks one at random",
+              "ms_MY": "Multiple variants separated by ==sep==; each send picks one at random",
+              "vi_VN": "Multiple variants separated by ==sep==; each send picks one at random",
+              "de_DE": "Multiple variants separated by ==sep==; each send picks one at random",
+              "es_ES": "Multiple variants separated by ==sep==; each send picks one at random",
+              "pt_BR": "Multiple variants separated by ==sep==; each send picks one at random",
+              "fr_FR": "Multiple variants separated by ==sep==; each send picks one at random",
+              "ru_RU": "Multiple variants separated by ==sep==; each send picks one at random"
+            },
+            "multiline": true,
+            "maxLines": 5,
+            "defaultValue": ""
+          },
+          {
+            "key": "attachment",
+            "type": "resource",
+            "allowMultiple": false,
+            "defaultValue": null,
+            "extensions": [
+              ".png",
+              ".jpg",
+              ".jpeg",
+              ".webp",
+              ".gif",
+              ".mp4",
+              ".mov"
+            ],
+            "label": {
+              "en_US": "Attachment",
+              "zh_CN": "附件",
+              "zh_TW": "附件",
+              "ja_JP": "Attachment",
+              "ko_KR": "Attachment",
+              "th_TH": "Attachment",
+              "id_ID": "Attachment",
+              "ms_MY": "Attachment",
+              "vi_VN": "Attachment",
+              "de_DE": "Attachment",
+              "es_ES": "Attachment",
+              "pt_BR": "Attachment",
+              "fr_FR": "Attachment",
+              "ru_RU": "Attachment"
+            },
+            "hint": {
+              "en_US": "Optional image/video with the DM",
+              "zh_CN": "可选；随私信发送的图片/视频",
+              "zh_TW": "可選；隨私信發送的圖片/影片",
+              "ja_JP": "Optional image/video with the DM",
+              "ko_KR": "Optional image/video with the DM",
+              "th_TH": "Optional image/video with the DM",
+              "id_ID": "Optional image/video with the DM",
+              "ms_MY": "Optional image/video with the DM",
+              "vi_VN": "Optional image/video with the DM",
+              "de_DE": "Optional image/video with the DM",
+              "es_ES": "Optional image/video with the DM",
+              "pt_BR": "Optional image/video with the DM",
+              "fr_FR": "Optional image/video with the DM",
+              "ru_RU": "Optional image/video with the DM"
+            }
+          }
+        ]
+      },
+      {
+        "title": {
+          "en_US": "Repeat",
+          "zh_CN": "循环设置",
+          "zh_TW": "循環設定",
+          "ja_JP": "Repeat",
+          "ko_KR": "Repeat",
+          "th_TH": "Repeat",
+          "id_ID": "Repeat",
+          "ms_MY": "Repeat",
+          "vi_VN": "Repeat",
+          "de_DE": "Repeat",
+          "es_ES": "Repeat",
+          "pt_BR": "Repeat",
+          "fr_FR": "Repeat",
+          "ru_RU": "Repeat"
+        },
+        "fields": [
+          {
+            "key": "intervalMinutes",
+            "type": "text",
+            "label": {
+              "en_US": "Interval between rounds (minutes)",
+              "zh_CN": "轮次间隔（分钟）",
+              "zh_TW": "輪次間隔（分鐘）",
+              "ja_JP": "Interval between rounds (minutes)",
+              "ko_KR": "Interval between rounds (minutes)",
+              "th_TH": "Interval between rounds (minutes)",
+              "id_ID": "Interval between rounds (minutes)",
+              "ms_MY": "Interval between rounds (minutes)",
+              "vi_VN": "Interval between rounds (minutes)",
+              "de_DE": "Interval between rounds (minutes)",
+              "es_ES": "Interval between rounds (minutes)",
+              "pt_BR": "Interval between rounds (minutes)",
+              "fr_FR": "Interval between rounds (minutes)",
+              "ru_RU": "Interval between rounds (minutes)"
+            },
+            "hint": {
+              "en_US": "After each round, wait this many minutes then scrape comments again until you stop",
+              "zh_CN": "每轮结束后等待该分钟数，再采评论；直到你在确认处结束",
+              "zh_TW": "每輪結束後等待該分鐘數，再採評論；直到你在確認處結束",
+              "ja_JP": "After each round, wait this many minutes then scrape comments again until you stop",
+              "ko_KR": "After each round, wait this many minutes then scrape comments again until you stop",
+              "th_TH": "After each round, wait this many minutes then scrape comments again until you stop",
+              "id_ID": "After each round, wait this many minutes then scrape comments again until you stop",
+              "ms_MY": "After each round, wait this many minutes then scrape comments again until you stop",
+              "vi_VN": "After each round, wait this many minutes then scrape comments again until you stop",
+              "de_DE": "After each round, wait this many minutes then scrape comments again until you stop",
+              "es_ES": "After each round, wait this many minutes then scrape comments again until you stop",
+              "pt_BR": "After each round, wait this many minutes then scrape comments again until you stop",
+              "fr_FR": "After each round, wait this many minutes then scrape comments again until you stop",
+              "ru_RU": "After each round, wait this many minutes then scrape comments again until you stop"
+            },
+            "inputType": "number",
+            "defaultValue": 60
+          }
+        ]
+      }
+    ],
+    "workflowResultConfig": [
+      {
+        "title": {
+          "en_US": "Workflow result",
+          "zh_CN": "工作流结果",
+          "zh_TW": "工作流結果",
+          "ja_JP": "Workflow result",
+          "ko_KR": "Workflow result",
+          "th_TH": "Workflow result",
+          "id_ID": "Workflow result",
+          "ms_MY": "Workflow result",
+          "vi_VN": "Workflow result",
+          "de_DE": "Workflow result",
+          "es_ES": "Workflow result",
+          "pt_BR": "Workflow result",
+          "fr_FR": "Workflow result",
+          "ru_RU": "Workflow result"
+        },
+        "fields": [
+          {
+            "key": "roundCount",
+            "type": "stat",
+            "label": {
+              "en_US": "Rounds completed",
+              "zh_CN": "完成轮数",
+              "zh_TW": "完成輪數",
+              "ja_JP": "Rounds completed",
+              "ko_KR": "Rounds completed",
+              "th_TH": "Rounds completed",
+              "id_ID": "Rounds completed",
+              "ms_MY": "Rounds completed",
+              "vi_VN": "Rounds completed",
+              "de_DE": "Rounds completed",
+              "es_ES": "Rounds completed",
+              "pt_BR": "Rounds completed",
+              "fr_FR": "Rounds completed",
+              "ru_RU": "Rounds completed"
+            }
+          },
+          {
+            "key": "selectedVideoCount",
+            "type": "stat",
+            "label": {
+              "en_US": "Confirmed videos",
+              "zh_CN": "确认视频数",
+              "zh_TW": "確認影片數",
+              "ja_JP": "Confirmed videos",
+              "ko_KR": "Confirmed videos",
+              "th_TH": "Confirmed videos",
+              "id_ID": "Confirmed videos",
+              "ms_MY": "Confirmed videos",
+              "vi_VN": "Confirmed videos",
+              "de_DE": "Confirmed videos",
+              "es_ES": "Confirmed videos",
+              "pt_BR": "Confirmed videos",
+              "fr_FR": "Confirmed videos",
+              "ru_RU": "Confirmed videos"
+            }
+          },
+          {
+            "key": "newUserCount",
+            "type": "stat",
+            "label": {
+              "en_US": "Confirmed users (all rounds)",
+              "zh_CN": "确认用户数（累计）",
+              "zh_TW": "確認用戶數（累計）",
+              "ja_JP": "Confirmed users (all rounds)",
+              "ko_KR": "Confirmed users (all rounds)",
+              "th_TH": "Confirmed users (all rounds)",
+              "id_ID": "Confirmed users (all rounds)",
+              "ms_MY": "Confirmed users (all rounds)",
+              "vi_VN": "Confirmed users (all rounds)",
+              "de_DE": "Confirmed users (all rounds)",
+              "es_ES": "Confirmed users (all rounds)",
+              "pt_BR": "Confirmed users (all rounds)",
+              "fr_FR": "Confirmed users (all rounds)",
+              "ru_RU": "Confirmed users (all rounds)"
+            }
+          },
+          {
+            "key": "followOkCount",
+            "type": "stat",
+            "label": {
+              "en_US": "Follow successes",
+              "zh_CN": "关注成功数",
+              "zh_TW": "關注成功數",
+              "ja_JP": "Follow successes",
+              "ko_KR": "Follow successes",
+              "th_TH": "Follow successes",
+              "id_ID": "Follow successes",
+              "ms_MY": "Follow successes",
+              "vi_VN": "Follow successes",
+              "de_DE": "Follow successes",
+              "es_ES": "Follow successes",
+              "pt_BR": "Follow successes",
+              "fr_FR": "Follow successes",
+              "ru_RU": "Follow successes"
+            }
+          },
+          {
+            "key": "dmOkCount",
+            "type": "stat",
+            "label": {
+              "en_US": "DM successes",
+              "zh_CN": "私信成功数",
+              "zh_TW": "私信成功數",
+              "ja_JP": "DM successes",
+              "ko_KR": "DM successes",
+              "th_TH": "DM successes",
+              "id_ID": "DM successes",
+              "ms_MY": "DM successes",
+              "vi_VN": "DM successes",
+              "de_DE": "DM successes",
+              "es_ES": "DM successes",
+              "pt_BR": "DM successes",
+              "fr_FR": "DM successes",
+              "ru_RU": "DM successes"
+            }
+          },
+          {
+            "key": "summary",
+            "type": "text",
+            "label": {
+              "en_US": "Summary",
+              "zh_CN": "摘要",
+              "zh_TW": "摘要",
+              "ja_JP": "Summary",
+              "ko_KR": "Summary",
+              "th_TH": "Summary",
+              "id_ID": "Summary",
+              "ms_MY": "Summary",
+              "vi_VN": "Summary",
+              "de_DE": "Summary",
+              "es_ES": "Summary",
+              "pt_BR": "Summary",
+              "fr_FR": "Summary",
+              "ru_RU": "Summary"
+            }
+          }
+        ]
+      }
+    ],
+    "scriptAi": {
+      "enabled": false,
+      "purpose": "",
+      "deviceMcp": {
+        "enabled": false,
+        "purpose": ""
+      }
+    },
+    "flowChart": {
+      "title": {
+        "en_US": "Keyword → comments → follow & DM",
+        "zh_CN": "关键词采评关注私信",
+        "zh_TW": "關鍵詞採評關注私信",
+        "ja_JP": "Keyword → comments → follow & DM",
+        "ko_KR": "Keyword → comments → follow & DM",
+        "th_TH": "Keyword → comments → follow & DM",
+        "id_ID": "Keyword → comments → follow & DM",
+        "ms_MY": "Keyword → comments → follow & DM",
+        "vi_VN": "Keyword → comments → follow & DM",
+        "de_DE": "Keyword → comments → follow & DM",
+        "es_ES": "Keyword → comments → follow & DM",
+        "pt_BR": "Keyword → comments → follow & DM",
+        "fr_FR": "Keyword → comments → follow & DM",
+        "ru_RU": "Keyword → comments → follow & DM"
+      },
+      "mermaid": "flowchart TD\n  start([填写关键词与筛选]) --> collectVid[并行采集关键词视频]\n  collectVid --> filterVid[筛选视频]\n  filterVid --> confirmVid{确认视频多选}\n  confirmVid -->|取消| doneEarly([保留进度结束])\n  confirmVid -->|确认| loopStart[并行采集视频评论]\n  loopStart --> dedupe[主页链接去重]\n  dedupe --> filterCmt[必须先筛选评论]\n  filterCmt --> confirmUser{确认筛选后用户}\n  confirmUser -->|取消| doneKeep([保留已处理结果])\n  confirmUser -->|确认| follow[并行批量关注]\n  follow --> dm[并行批量私信]\n  dm --> more{继续下一轮}\n  more -->|结束| doneKeep\n  more -->|等待间隔分钟| loopStart"
+    }
+  }
+}

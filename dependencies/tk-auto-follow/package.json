@@ -1,0 +1,510 @@
+{
+  "name": "tk-auto-follow",
+  "version": "1.0.5",
+  "private": true,
+  "type": "module",
+  "displayName": {
+    "en_US": "批量自动关注",
+    "de_DE": "批量自动关注",
+    "es_ES": "批量自动关注",
+    "fr_FR": "批量自动关注",
+    "id_ID": "批量自动关注",
+    "ja_JP": "批量自动关注",
+    "ko_KR": "批量自动关注",
+    "ms_MY": "批量自动关注",
+    "pt_BR": "批量自动关注",
+    "ru_RU": "批量自动关注",
+    "th_TH": "批量自动关注",
+    "vi_VN": "批量自动关注",
+    "zh_CN": "批量自动关注",
+    "zh_TW": "批量自动关注"
+  },
+  "description": {
+    "en_US": "Open a TikTok profile URL and follow the user. Already following counts as success.",
+    "zh_CN": "打开 TikTok 用户主页并点击关注；若已关注则直接成功。",
+    "zh_TW": "開啟 TikTok 用戶主頁並點擊關注；若已關注則直接成功。",
+    "ja_JP": "TikTokプロフィールを開きフォロー。既にフォロー済みなら成功。",
+    "ko_KR": "TikTok 프로필을 열고 팔로우합니다. 이미 팔로우 중이면 성공 처리합니다.",
+    "th_TH": "เปิดโปรไฟล์ TikTok แล้วกดติดตาม หากติดตามอยู่แล้วถือว่าสำเร็จ",
+    "id_ID": "Buka profil TikTok dan ikuti pengguna. Sudah mengikuti tetap sukses.",
+    "ms_MY": "Buka profil TikTok dan ikut pengguna. Sudah ikut dikira berjaya.",
+    "vi_VN": "Mở hồ sơ TikTok và theo dõi. Đã theo dõi vẫn tính thành công.",
+    "de_DE": "TikTok-Profil oeffnen und folgen. Bereits folgend gilt als Erfolg.",
+    "es_ES": "Abrir perfil de TikTok y seguir. Si ya se sigue, cuenta como exito.",
+    "pt_BR": "Abrir perfil do TikTok e seguir. Se ja segue, conta como sucesso.",
+    "fr_FR": "Ouvrir un profil TikTok et suivre. Deja suivi = succes.",
+    "ru_RU": "Открыть профиль TikTok и подписаться. Уже подписан — успех."
+  },
+  "main": "./main.ts",
+  "dependencies": {
+    "xport-browser-sdk": "file:../xport_browser_sdk"
+  },
+  "engines": {
+    "bun": ">=1.4.0"
+  },
+  "devDependencies": {
+    "bun-types": "^1.4.2"
+  },
+  "xportAutomation": {
+    "taskGroupConfig": [
+      {
+        "title": {
+          "en_US": "Targets / devices",
+          "zh_CN": "目标与设备",
+          "zh_TW": "目標與裝置",
+          "ja_JP": "対象/デバイス",
+          "ko_KR": "대상/기기",
+          "th_TH": "เป้าหมาย/อุปกรณ์",
+          "id_ID": "Target/perangkat",
+          "ms_MY": "Sasaran/peranti",
+          "vi_VN": "Mục tiêu/thiết bị",
+          "de_DE": "Ziele/Geräte",
+          "es_ES": "Objetivos/dispositivos",
+          "pt_BR": "Alvos/dispositivos",
+          "fr_FR": "Cibles/appareils",
+          "ru_RU": "Цели/устройства"
+        },
+        "fields": [
+          {
+            "key": "hosts",
+            "type": "text",
+            "label": {
+              "en_US": "Profile URLs to follow",
+              "zh_CN": "要关注的用户主页",
+              "zh_TW": "要關注的用戶主頁",
+              "ja_JP": "フォローするプロフィールURL",
+              "ko_KR": "팔로우할 프로필 URL",
+              "th_TH": "URL โปรไฟล์ที่จะติดตาม",
+              "id_ID": "URL profil untuk diikuti",
+              "ms_MY": "URL profil untuk diikuti",
+              "vi_VN": "URL hồ sơ cần theo dõi",
+              "de_DE": "Zu folgende Profil-URLs",
+              "es_ES": "URL de perfiles a seguir",
+              "pt_BR": "URLs de perfil para seguir",
+              "fr_FR": "URL de profils a suivre",
+              "ru_RU": "URL профилей для подписки"
+            },
+            "hint": {
+              "en_US": "One TikTok profile URL per line. Distribution is controlled by Even distribute below.",
+              "zh_CN": "支持多行，每一行一个用户主页；分配方式由下方「平均分配」开关控制。",
+              "zh_TW": "支援多行，每一行一個用戶主頁；分配方式由下方「平均分配」開關控制。",
+              "ja_JP": "1行に1つのプロフィールURL。分配は下の均等配分スイッチで制御。",
+              "ko_KR": "한 줄에 프로필 URL 하나. 할당은 아래 균등 분배 스위치로 제어.",
+              "th_TH": "หนึ่ง URL ต่อหนึ่งบรรทัด การแจกจ่ายควบคุมด้วยสวิตช์ด้านล่าง",
+              "id_ID": "Satu URL profil per baris. Pembagian dikontrol saklar di bawah.",
+              "ms_MY": "Satu URL profil setiap baris. Pembahagian dikawal suis di bawah.",
+              "vi_VN": "Mỗi dòng một URL hồ sơ. Cách phân phối do công tắc bên dưới.",
+              "de_DE": "Eine Profil-URL pro Zeile. Verteilung steuert der Schalter unten.",
+              "es_ES": "Una URL de perfil por línea. La distribución la controla el interruptor de abajo.",
+              "pt_BR": "Uma URL de perfil por linha. A distribuição é controlada pelo interruptor abaixo.",
+              "fr_FR": "Une URL de profil par ligne. La repartition est controlee par l interrupteur ci-dessous.",
+              "ru_RU": "По одному URL профиля в строке. Распределение задаётся переключателем ниже."
+            },
+            "multiline": true,
+            "maxLines": 5,
+            "defaultValue": ""
+          },
+          {
+            "key": "browsers",
+            "type": "browser",
+            "label": {
+              "en_US": "Browsers",
+              "zh_CN": "浏览器",
+              "zh_TW": "瀏覽器",
+              "ja_JP": "ブラウザ",
+              "ko_KR": "브라우저",
+              "th_TH": "เบราว์เซอร์",
+              "id_ID": "Browser",
+              "ms_MY": "Pelayar",
+              "vi_VN": "Trình duyệt",
+              "de_DE": "Browser",
+              "es_ES": "Navegadores",
+              "pt_BR": "Navegadores",
+              "fr_FR": "Navigateurs",
+              "ru_RU": "Браузеры"
+            },
+            "hint": {
+              "en_US": "Select logged-in TikTok browsers. See Even distribute for how URLs are assigned.",
+              "zh_CN": "选择已登录 TikTok 的浏览器；链接如何分配见下方「平均分配」。",
+              "zh_TW": "選擇已登入 TikTok 的瀏覽器；連結如何分配見下方「平均分配」。",
+              "ja_JP": "ログイン済みブラウザを選択。URL割当は均等配分スイッチを参照。",
+              "ko_KR": "로그인한 TikTok 브라우저 선택. URL 할당은 균등 분배 스위치 참고.",
+              "th_TH": "เลือกเบราว์เซอร์ที่ล็อกอินแล้ว ดูสวิตช์ด้านล่างเรื่องการแจก URL",
+              "id_ID": "Pilih browser TikTok yang sudah login. Lihat saklar di bawah untuk pembagian URL.",
+              "ms_MY": "Pilih pelayar TikTok yang sudah log masuk. Lihat suis di bawah untuk bahagi URL.",
+              "vi_VN": "Chọn trình duyệt TikTok đã đăng nhập. Xem công tắc bên dưới để phân URL.",
+              "de_DE": "Eingeloggte TikTok-Browser waehlen. URL-Zuweisung siehe Schalter unten.",
+              "es_ES": "Seleccione navegadores con sesion. La asignacion de URL esta abajo.",
+              "pt_BR": "Selecione navegadores logados. A atribuicao de URLs esta abaixo.",
+              "fr_FR": "Selectionnez des navigateurs connectes. Attribution des URL ci-dessous.",
+              "ru_RU": "Выберите браузеры с входом. Назначение URL — переключатель ниже."
+            },
+            "single": false,
+            "platform": "tiktok",
+            "defaultValue": []
+          },
+          {
+            "key": "even_distribute",
+            "type": "switch",
+            "label": {
+              "en_US": "Even distribute",
+              "zh_CN": "平均分配",
+              "zh_TW": "平均分配",
+              "ja_JP": "均等配分",
+              "ko_KR": "균등 분배",
+              "th_TH": "แจกจ่ายเท่าๆ กัน",
+              "id_ID": "Bagi rata",
+              "ms_MY": "Bahagi sama",
+              "vi_VN": "Chia đều",
+              "de_DE": "Gleichmäßig verteilen",
+              "es_ES": "Reparto equitativo",
+              "pt_BR": "Distribuir igualmente",
+              "fr_FR": "Répartir également",
+              "ru_RU": "Равномерное распределение"
+            },
+            "hint": {
+              "en_US": "ON: URLs are round-robin across browsers (each URL once). OFF: each browser follows every URL.",
+              "zh_CN": "开启：链接轮询均分到各浏览器（每条链接只跑一次）。关闭：每台浏览器都跑全部链接。",
+              "zh_TW": "開啟：連結輪詢均分到各瀏覽器（每條連結只跑一次）。關閉：每台瀏覽器都跑全部連結。",
+              "ja_JP": "ON：URLをブラウザ間でラウンドロビン（各URLは1回）。OFF：各ブラウザが全URLを実行。",
+              "ko_KR": "켜기: URL을 브라우저에 라운드로빈(각 URL 1회). 끄기: 각 브라우저가 모든 URL 실행.",
+              "th_TH": "เปิด: แจก URL แบบวนรอบ (URL ละครั้ง). ปิด: ทุกเบราว์เซอร์รันทุก URL",
+              "id_ID": "ON: URL dibagi round-robin (setiap URL sekali). OFF: setiap browser menjalankan semua URL.",
+              "ms_MY": "ON: URL diagih round-robin (setiap URL sekali). OFF: setiap pelayar jalankan semua URL.",
+              "vi_VN": "Bật: chia URL vòng tròn (mỗi URL một lần). Tắt: mỗi trình duyệt chạy tất cả URL.",
+              "de_DE": "AN: URLs round-robin (jede URL einmal). AUS: jeder Browser folgt allen URLs.",
+              "es_ES": "ON: URLs en round-robin (cada URL una vez). OFF: cada navegador sigue todas las URL.",
+              "pt_BR": "ON: URLs em round-robin (cada URL uma vez). OFF: cada navegador segue todas as URLs.",
+              "fr_FR": "ON : URLs en round-robin (chaque URL une fois). OFF : chaque navigateur suit toutes les URL.",
+              "ru_RU": "ВКЛ: URL по кругу (каждый URL один раз). ВЫКЛ: каждый браузер выполняет все URL."
+            },
+            "defaultValue": 0
+          }
+        ]
+      },
+      {
+        "title": {
+          "en_US": "Schedule",
+          "zh_CN": "频率规划控制",
+          "zh_TW": "頻率規劃控制",
+          "ja_JP": "スケジュール",
+          "ko_KR": "일정",
+          "th_TH": "กำหนดการ",
+          "id_ID": "Jadwal",
+          "ms_MY": "Jadual",
+          "vi_VN": "Lịch trình",
+          "de_DE": "Zeitplan",
+          "es_ES": "Programación",
+          "pt_BR": "Agendamento",
+          "fr_FR": "Planification",
+          "ru_RU": "Расписание"
+        },
+        "fields": [
+          {
+            "key": "daily_limit",
+            "type": "text",
+            "label": {
+              "en_US": "Daily limit",
+              "zh_CN": "每日上限",
+              "zh_TW": "每日上限",
+              "ja_JP": "1日の上限",
+              "ko_KR": "일일 한도",
+              "th_TH": "ขีดจำกัดรายวัน",
+              "id_ID": "Batas harian",
+              "ms_MY": "Had harian",
+              "vi_VN": "Giới hạn hàng ngày",
+              "de_DE": "Tageslimit",
+              "es_ES": "Límite diario",
+              "pt_BR": "Limite diário",
+              "fr_FR": "Limite quotidienne",
+              "ru_RU": "Дневной лимит"
+            },
+            "hint": {
+              "en_US": "Max tasks assigned to each device per day",
+              "zh_CN": "每个设备每天最多分配多少个任务",
+              "zh_TW": "每個裝置每天最多分配多少個任務",
+              "ja_JP": "各デバイスに1日で割り当てる最大タスク数",
+              "ko_KR": "기기당 하루 최대 작업 수",
+              "th_TH": "งานสูงสุดต่ออุปกรณ์ต่อวัน",
+              "id_ID": "Maks. tugas per perangkat per hari",
+              "ms_MY": "Maks tugas setiap peranti sehari",
+              "vi_VN": "Số nhiệm vụ tối đa mỗi thiết bị mỗi ngày",
+              "de_DE": "Max. Aufgaben pro Gerät und Tag",
+              "es_ES": "Máx. de tareas por dispositivo y día",
+              "pt_BR": "Máx. de tarefas por dispositivo por dia",
+              "fr_FR": "Nombre max. de taches par appareil et par jour",
+              "ru_RU": "Макс. число задач на устройство в день"
+            },
+            "inputType": "number",
+            "defaultValue": 10
+          },
+          {
+            "key": "during_min",
+            "type": "text",
+            "label": {
+              "en_US": "Min interval (s)",
+              "zh_CN": "最小间隔（s）",
+              "zh_TW": "最小間隔（s）",
+              "ja_JP": "最小間隔（秒）",
+              "ko_KR": "최소 간격(초)",
+              "th_TH": "ช่วงห่างต่ำสุด (วินาที)",
+              "id_ID": "Interval min (d)",
+              "ms_MY": "Selang min (s)",
+              "vi_VN": "Khoảng tối thiểu (giây)",
+              "de_DE": "Min. Abstand (s)",
+              "es_ES": "Intervalo mín. (s)",
+              "pt_BR": "Intervalo mín. (s)",
+              "fr_FR": "Intervalle min. (s)",
+              "ru_RU": "Мин. интервал (с)"
+            },
+            "hint": {
+              "en_US": "Min interval between runs on the same device (seconds)",
+              "zh_CN": "同一设备上两次任务执行之间的最小间隔（秒）",
+              "zh_TW": "同一裝置上兩次任務執行之間的最小間隔（秒）",
+              "ja_JP": "同一デバイスでの実行間隔の最小値（秒）",
+              "ko_KR": "동일 기기 실행 간격 최소(초)",
+              "th_TH": "ช่วงห่างต่ำสุดระหว่างรอบบนอุปกรณ์เดียวกัน (วินาที)",
+              "id_ID": "Interval min antar jalan pada perangkat yang sama (detik)",
+              "ms_MY": "Selang min antara larian pada peranti sama (saat)",
+              "vi_VN": "Khoảng tối thiểu giữa các lần chạy trên cùng thiết bị (giây)",
+              "de_DE": "Min. Abstand zwischen Läufen auf demselben Gerät (Sekunden)",
+              "es_ES": "Intervalo mín. entre ejecuciones en el mismo dispositivo (segundos)",
+              "pt_BR": "Intervalo mín. entre execuções no mesmo dispositivo (segundos)",
+              "fr_FR": "Intervalle min. entre executions sur le meme appareil (secondes)",
+              "ru_RU": "Мин. интервал между запусками на одном устройстве (сек)"
+            },
+            "defaultValue": "60"
+          },
+          {
+            "key": "during_max",
+            "type": "text",
+            "label": {
+              "en_US": "Max interval (s)",
+              "zh_CN": "最大间隔（s）",
+              "zh_TW": "最大間隔（s）",
+              "ja_JP": "最大間隔（秒）",
+              "ko_KR": "최대 간격(초)",
+              "th_TH": "ช่วงห่างสูงสุด (วินาที)",
+              "id_ID": "Interval maks (d)",
+              "ms_MY": "Selang maks (s)",
+              "vi_VN": "Khoảng tối đa (giây)",
+              "de_DE": "Max. Abstand (s)",
+              "es_ES": "Intervalo máx. (s)",
+              "pt_BR": "Intervalo máx. (s)",
+              "fr_FR": "Intervalle max. (s)",
+              "ru_RU": "Макс. интервал (с)"
+            },
+            "hint": {
+              "en_US": "Max interval between runs on the same device (seconds)",
+              "zh_CN": "同一设备上两次任务执行之间的最大间隔（秒）",
+              "zh_TW": "同一裝置上兩次任務執行之間的最大間隔（秒）",
+              "ja_JP": "同一デバイスでの実行間隔の最大値（秒）",
+              "ko_KR": "동일 기기 실행 간격 최대(초)",
+              "th_TH": "ช่วงห่างสูงสุดระหว่างรอบบนอุปกรณ์เดียวกัน (วินาที)",
+              "id_ID": "Interval maks antar jalan pada perangkat yang sama (detik)",
+              "ms_MY": "Selang maks antara larian pada peranti sama (saat)",
+              "vi_VN": "Khoảng tối đa giữa các lần chạy trên cùng thiết bị (giây)",
+              "de_DE": "Max. Abstand zwischen Läufen auf demselben Gerät (Sekunden)",
+              "es_ES": "Intervalo máx. entre ejecuciones en el mismo dispositivo (segundos)",
+              "pt_BR": "Intervalo máx. entre execuções no mesmo dispositivo (segundos)",
+              "fr_FR": "Intervalle max. entre executions sur le meme appareil (secondes)",
+              "ru_RU": "Макс. интервал между запусками на одном устройстве (сек)"
+            },
+            "defaultValue": "600"
+          },
+          {
+            "key": "daily_time_start",
+            "type": "time",
+            "label": {
+              "en_US": "Daily start time",
+              "zh_CN": "每日执行开始时间",
+              "zh_TW": "每日執行開始時間",
+              "ja_JP": "毎日の開始時刻",
+              "ko_KR": "매일 시작 시간",
+              "th_TH": "เวลาเริ่มรายวัน",
+              "id_ID": "Waktu mulai harian",
+              "ms_MY": "Masa mula harian",
+              "vi_VN": "Giờ bắt đầu mỗi ngày",
+              "de_DE": "Täglicher Startzeitpunkt",
+              "es_ES": "Hora de inicio diaria",
+              "pt_BR": "Horário de início diário",
+              "fr_FR": "Heure de debut quotidienne",
+              "ru_RU": "Ежедневное время начала"
+            },
+            "defaultValue": "09:00"
+          },
+          {
+            "key": "daily_time_end",
+            "type": "time",
+            "label": {
+              "en_US": "Daily end time",
+              "zh_CN": "每日执行结束时间",
+              "zh_TW": "每日執行結束時間",
+              "ja_JP": "毎日の終了時刻",
+              "ko_KR": "매일 종료 시간",
+              "th_TH": "เวลาสิ้นสุดรายวัน",
+              "id_ID": "Waktu selesai harian",
+              "ms_MY": "Masa tamat harian",
+              "vi_VN": "Giờ kết thúc mỗi ngày",
+              "de_DE": "Täglicher Endzeitpunkt",
+              "es_ES": "Hora de fin diaria",
+              "pt_BR": "Horário de término diário",
+              "fr_FR": "Heure de fin quotidienne",
+              "ru_RU": "Ежедневное время окончания"
+            },
+            "defaultValue": "18:00"
+          }
+        ]
+      }
+    ],
+    "taskRunConfig": [
+      {
+        "title": {
+          "en_US": "Target user",
+          "zh_CN": "目标用户",
+          "zh_TW": "目標用戶",
+          "ja_JP": "対象ユーザー",
+          "ko_KR": "대상 사용자",
+          "th_TH": "ผู้ใช้เป้าหมาย",
+          "id_ID": "Pengguna target",
+          "ms_MY": "Pengguna sasaran",
+          "vi_VN": "Người dùng đích",
+          "de_DE": "Zielbenutzer",
+          "es_ES": "Usuario de destino",
+          "pt_BR": "Usuário alvo",
+          "fr_FR": "Utilisateur cible",
+          "ru_RU": "Целевой пользователь"
+        },
+        "fields": [
+          {
+            "key": "host",
+            "type": "text",
+            "label": {
+              "en_US": "Profile URL to follow",
+              "zh_CN": "要关注的用户主页地址",
+              "zh_TW": "要關注的用戶主頁地址",
+              "ja_JP": "フォローするプロフィールURL",
+              "ko_KR": "팔로우할 프로필 URL",
+              "th_TH": "URL โปรไฟล์ที่จะติดตาม",
+              "id_ID": "URL profil untuk diikuti",
+              "ms_MY": "URL profil untuk diikuti",
+              "vi_VN": "URL hồ sơ cần theo dõi",
+              "de_DE": "Zu folgende Profil-URL",
+              "es_ES": "URL del perfil a seguir",
+              "pt_BR": "URL do perfil para seguir",
+              "fr_FR": "URL du profil a suivre",
+              "ru_RU": "URL профиля для подписки"
+            },
+            "hint": {
+              "en_US": "Example: https://www.tiktok.com/@username",
+              "zh_CN": "例如：https://www.tiktok.com/@username",
+              "zh_TW": "例如：https://www.tiktok.com/@username",
+              "ja_JP": "例: https://www.tiktok.com/@username",
+              "ko_KR": "예: https://www.tiktok.com/@username",
+              "th_TH": "ตัวอย่าง: https://www.tiktok.com/@username",
+              "id_ID": "Contoh: https://www.tiktok.com/@username",
+              "ms_MY": "Contoh: https://www.tiktok.com/@username",
+              "vi_VN": "Ví dụ: https://www.tiktok.com/@username",
+              "de_DE": "Beispiel: https://www.tiktok.com/@username",
+              "es_ES": "Ejemplo: https://www.tiktok.com/@username",
+              "pt_BR": "Exemplo: https://www.tiktok.com/@username",
+              "fr_FR": "Exemple: https://www.tiktok.com/@username",
+              "ru_RU": "Пример: https://www.tiktok.com/@username"
+            },
+            "defaultValue": "https://www.tiktok.com/@soshitaislam"
+          }
+        ]
+      }
+    ],
+    "taskResultConfig": [
+      {
+        "title": {
+          "en_US": "Run result",
+          "zh_CN": "执行结果",
+          "zh_TW": "執行結果",
+          "ja_JP": "実行結果",
+          "ko_KR": "실행 결과",
+          "th_TH": "ผลการรัน",
+          "id_ID": "Hasil eksekusi",
+          "ms_MY": "Hasil larian",
+          "vi_VN": "Kết quả chạy",
+          "de_DE": "Ausführungsergebnis",
+          "es_ES": "Resultado de ejecución",
+          "pt_BR": "Resultado da execução",
+          "fr_FR": "Resultat d execution",
+          "ru_RU": "Результат выполнения"
+        },
+        "fields": [
+          {
+            "key": "host",
+            "type": "text",
+            "label": {
+              "en_US": "Target profile",
+              "zh_CN": "目标主页",
+              "zh_TW": "目標主頁",
+              "ja_JP": "対象プロフィール",
+              "ko_KR": "대상 프로필",
+              "th_TH": "โปรไฟล์เป้าหมาย",
+              "id_ID": "Profil target",
+              "ms_MY": "Profil sasaran",
+              "vi_VN": "Hồ sơ đích",
+              "de_DE": "Zielprofil",
+              "es_ES": "Perfil de destino",
+              "pt_BR": "Perfil alvo",
+              "fr_FR": "Profil cible",
+              "ru_RU": "Целевой профиль"
+            }
+          },
+          {
+            "key": "follow_status",
+            "type": "stat",
+            "label": {
+              "en_US": "Follow status",
+              "zh_CN": "关注状态",
+              "zh_TW": "關注狀態",
+              "ja_JP": "フォロー状態",
+              "ko_KR": "팔로우 상태",
+              "th_TH": "สถานะการติดตาม",
+              "id_ID": "Status follow",
+              "ms_MY": "Status ikut",
+              "vi_VN": "Trạng thái theo dõi",
+              "de_DE": "Follow-Status",
+              "es_ES": "Estado de seguimiento",
+              "pt_BR": "Status de seguir",
+              "fr_FR": "Statut de suivi",
+              "ru_RU": "Статус подписки"
+            }
+          },
+          {
+            "key": "finalUrl",
+            "type": "text",
+            "label": {
+              "en_US": "Final URL",
+              "zh_CN": "最终页面",
+              "zh_TW": "最終頁面",
+              "ja_JP": "最終URL",
+              "ko_KR": "최종 URL",
+              "th_TH": "URL สุดท้าย",
+              "id_ID": "URL akhir",
+              "ms_MY": "URL akhir",
+              "vi_VN": "URL cuối",
+              "de_DE": "Endgültige URL",
+              "es_ES": "URL final",
+              "pt_BR": "URL final",
+              "fr_FR": "URL finale",
+              "ru_RU": "Итоговый URL"
+            }
+          }
+        ]
+      }
+    ],
+    "scriptAi": {
+      "enabled": false,
+      "purpose": "",
+      "deviceMcp": {
+        "enabled": false,
+        "purpose": ""
+      }
+    }
+  }
+}

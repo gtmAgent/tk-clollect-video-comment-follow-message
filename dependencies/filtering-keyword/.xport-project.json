@@ -1,0 +1,15 @@
+{
+  "format": "xport-github-project",
+  "formatVersion": 1,
+  "kind": "automation",
+  "exportedAt": 1792983535,
+  "project": {
+    "label": "filtering-keyword",
+    "name": "筛选关键词",
+    "target": "client",
+    "version": "1.2.4"
+  },
+  "deviceTargets": [
+    "client"
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "version": 2,
+  "uuid": "774aa644-8f5b-4166-9689-049714565511",
+  "name": "TikTok批量发送私信",
+  "description": "给指定的用户批量定时发送私信",
+  "deviceType": "browser",
+  "socialCategoryId": 3,
+  "deviceId": 0,
+  "createdAt": 1791961147,
+  "updatedAt": 1792721836,
+  "routes": [
+    {
+      "index": 1,
+      "routeId": "534df0de-ba28-4b9e-b1e3-f38ac483dcec",
+      "name": "指定主页批量发送私信",
+      "description": "放入的主页链接",
+      "entryUrl": "https://www.tiktok.com/@munair4757",
+      "steps": [
+        {
+          "index": 1,
+          "stepId": "a3d3860d-e8e2-4b05-a7e1-025125b18aba",
+          "title": "点击消息发送私信（适配常用语言）",
+          "description": "根据放入的主页链接跳转",
+          "capturedAt": 1791962990,
+          "screenshot": "routes/001/steps/001/screenshot.png",
+          "annotatedScreenshot": "routes/001/steps/001/annotated.png",
+          "markup": "routes/001/steps/001/markup.json",
+          "meta": {
+            "browser": {
+              "url": "https://www.tiktok.com/@munair4757",
+              "title": "(99+)muner jutt (@munair4757) | TikTok",
+              "pagePath": "routes/001/steps/001/page.html"
+            }
+          }
+        },
+        {
+          "index": 2,
+          "stepId": "a9d78507-e812-4097-9007-6c4ce3a26ce7",
+          "title": "放入文案点击发送",
+          "description": "任务里面多个文案放入用==sep==分割开来（一个子文案）发送",
+          "capturedAt": 1791963068,
+          "screenshot": "routes/001/steps/002/screenshot.png",
+          "annotatedScreenshot": "routes/001/steps/002/annotated.png",
+          "markup": "routes/001/steps/002/markup.json",
+          "meta": {
+            "browser": {
+              "url": "https://www.tiktok.com/messages?lang=en",
+              "title": "Messages | TikTok",
+              "pagePath": "routes/001/steps/002/page.html"
+            }
+          }
+        },
+        {
+          "index": 3,
+          "stepId": "5be2324a-13e6-4642-b1d9-954c9976427c",
+          "title": "如遇到红色感叹号可以直接跳过该任务",
+          "description": "",
+          "capturedAt": 1791965217,
+          "screenshot": "routes/001/steps/003/screenshot.png",
+          "annotatedScreenshot": "routes/001/steps/003/annotated.png",
+          "markup": "routes/001/steps/003/markup.json",
+          "meta": {
+            "browser": {
+              "url": "https://www.tiktok.com/messages",
+              "title": "Messages | TikTok",
+              "pagePath": "routes/001/steps/003/page.html"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

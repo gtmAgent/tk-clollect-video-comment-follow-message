@@ -1,0 +1,34 @@
+{
+  "format": "xport-github-project",
+  "formatVersion": 1,
+  "kind": "automation",
+  "exportedAt": 1792983536,
+  "project": {
+    "label": "tk-sendbulkdirectmessages-browser",
+    "name": "TikTok批量发送私信",
+    "target": "browser",
+    "version": "1.1.2"
+  },
+  "deviceTargets": [
+    "browser",
+    "android",
+    "ios"
+  ],
+  "socialCategory": {
+    "sourceId": 3,
+    "sourceUid": 0,
+    "name": "TikTok",
+    "icon": "social/797b7eaf-118d-4399-aaf2-c23c826396b2.svg",
+    "websiteDomain": "https://www.tiktok.com",
+    "androidPackage": "com.zhiliaoapp.musically",
+    "iosPackage": "com.zhiliaoapp.musically"
+  },
+  "record": {
+    "uuid": "774aa644-8f5b-4166-9689-049714565511",
+    "name": "TikTok批量发送私信",
+    "description": "给指定的用户批量定时发送私信",
+    "deviceType": "browser",
+    "updateAt": 1792721836,
+    "contentMd5": "0095074f5edfd1af79169aa7024b0194"
+  }
+}

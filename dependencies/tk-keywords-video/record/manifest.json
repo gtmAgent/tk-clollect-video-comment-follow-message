@@ -1,0 +1,72 @@
+{
+  "version": 2,
+  "uuid": "d4657ad1-e3b7-4b12-8a1c-c007d11566b4",
+  "name": "TikTok关键词采集视频链接",
+  "description": "",
+  "deviceType": "browser",
+  "socialCategoryId": 3,
+  "deviceId": 0,
+  "createdAt": 1792486752,
+  "updatedAt": 1792721833,
+  "routes": [
+    {
+      "index": 1,
+      "routeId": "ae9872a2-0602-454b-b514-1ed0679e3d72",
+      "name": "tiktok关键词采集视频链接",
+      "description": "",
+      "steps": [
+        {
+          "index": 1,
+          "stepId": "65d312a9-da5b-438e-bd3d-28f341dcbfd0",
+          "title": "输入关键词",
+          "description": "",
+          "capturedAt": 1792486871,
+          "screenshot": "routes/001/steps/001/screenshot.png",
+          "annotatedScreenshot": "routes/001/steps/001/annotated.png",
+          "markup": "routes/001/steps/001/markup.json",
+          "meta": {
+            "browser": {
+              "url": "https://www.tiktok.com/",
+              "title": "(99+)TikTok - Make Your Day",
+              "pagePath": "routes/001/steps/001/page.html"
+            }
+          }
+        },
+        {
+          "index": 2,
+          "stepId": "e514bf5d-d344-45c1-baff-c7f8064b9964",
+          "title": "回车搜索",
+          "description": "https://www.tiktok.com/search?q=book这个是快捷跳转链接",
+          "capturedAt": 1792486892,
+          "screenshot": "routes/001/steps/002/screenshot.png",
+          "annotatedScreenshot": "routes/001/steps/002/annotated.png",
+          "markup": "routes/001/steps/002/markup.json",
+          "meta": {
+            "browser": {
+              "url": "https://www.tiktok.com/",
+              "title": "(99+)TikTok - Make Your Day",
+              "pagePath": "routes/001/steps/002/page.html"
+            }
+          }
+        },
+        {
+          "index": 3,
+          "stepId": "b9be7624-d0e2-476c-ac27-c941c19198d4",
+          "title": "采集数据",
+          "description": "把视频链接，文案,发布日期采集下来",
+          "capturedAt": 1792487338,
+          "screenshot": "routes/001/steps/003/screenshot.png",
+          "annotatedScreenshot": "routes/001/steps/003/annotated.png",
+          "markup": "routes/001/steps/003/markup.json",
+          "meta": {
+            "browser": {
+              "url": "https://www.tiktok.com/search?q=book",
+              "title": "(99+)Find 'book' on TikTok | TikTok Search",
+              "pagePath": "routes/001/steps/003/page.html"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
