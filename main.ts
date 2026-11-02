@@ -632,8 +632,8 @@ async function runWorkflow(ctx: WorkflowContext, cfg: WorkflowRunConfig): Promis
   const commentKw = asStr(cfg.commentFilterKeywords);
   let videoPublishStart = optionalUnixNull(cfg.videoPublishStart);
   let videoPublishEnd = optionalUnixNull(cfg.videoPublishEnd);
-  const videoLikeMin = optionalLikeNull(cfg.videoLikeMin);
-  const videoLikeMax = optionalLikeNull(cfg.videoLikeMax);
+  let videoLikeMin = optionalLikeNull(cfg.videoLikeMin);
+  let videoLikeMax = optionalLikeNull(cfg.videoLikeMax);
   let commentPublishStart = optionalUnixNull(cfg.commentPublishStart);
   let commentPublishEnd = optionalUnixNull(cfg.commentPublishEnd);
 
@@ -717,6 +717,27 @@ async function runWorkflow(ctx: WorkflowContext, cfg: WorkflowRunConfig): Promis
     `wrote video source rows=${collected.rows.length} emptyLikes=${emptyLikes} collectTime=${videoCollectTime}`,
   );
 
+  // 采集脚本当前常拿不到点赞：若仍按点赞筛会整批落空。点赞全空时自动忽略点赞条件，改靠关键词/时间。
+  let skippedLikeFilterForEmpty = false;
+  if (
+    collected.rows.length > 0 &&
+    emptyLikes === collected.rows.length &&
+    (videoLikeMin != null || videoLikeMax != null)
+  ) {
+    skippedLikeFilterForEmpty = true;
+    ctx.workflowLog(
+      `all likes empty (${emptyLikes}); ignore likeMin=${videoLikeMin} likeMax=${videoLikeMax}`,
+    );
+    videoLikeMin = null;
+    videoLikeMax = null;
+    if (!hasAnyFilter(videoKw, cfg.videoPublishStart, cfg.videoPublishEnd)) {
+      return finish(
+        false,
+        `采集 ${collected.rows.length} 条视频点赞全部为空，无法按点赞筛选，且未填视频关键词/时间。请先只填关键词或时间，或清空点赞条件后重试`,
+      );
+    }
+  }
+
   const videoMatched = await resolveMatchedTable(ctx, {
     tsvText: videoTsvText,
     sourceJsonPath: videoJsonPath,
@@ -732,19 +753,16 @@ async function runWorkflow(ctx: WorkflowContext, cfg: WorkflowRunConfig): Promis
 
   const filteredVideoRows = tableToVideos(videoMatched.headers, videoMatched.matched);
   if (filteredVideoRows.length === 0) {
-    const likeHint =
-      emptyLikes > 0 && (videoLikeMin != null || videoLikeMax != null)
-        ? `（采集中有 ${emptyLikes}/${collected.rows.length} 条点赞为空，按点赞筛选可能全部落空）`
-        : '';
     return finish(
       false,
-      `视频筛选命中 0 条（采集 ${collected.rows.length} 条）。请放宽视频筛选条件后再试${likeHint}`,
+      `视频筛选命中 0 条（采集 ${collected.rows.length} 条）。请放宽视频关键词或时间后再试`,
     );
   }
 
   // —— 2) 人工确认视频 ——
-  const likeHint =
-    emptyLikes > 0
+  const likeHint = skippedLikeFilterForEmpty
+    ? ` 注意：采集点赞全部为空，已自动跳过点赞条件，仅按关键词/时间筛出 ${filteredVideoRows.length} 条。`
+    : emptyLikes > 0
       ? ` 注意：采集中有 ${emptyLikes}/${collected.rows.length} 条点赞为空。`
       : '';
   ctx.workflowLog(`humanConfirm videos options=${filteredVideoRows.length}`);

@@ -2,7 +2,7 @@
   "format": "xport-github-project",
   "formatVersion": 1,
   "kind": "automation",
-  "exportedAt": 1792983535,
+  "exportedAt": 1793587973,
   "project": {
     "label": "tk-auto-follow",
     "name": "批量自动关注",

@@ -1,6 +1,6 @@
 {
   "name": "tk-clollect-video-comment-follow-message",
-  "version": "1.1.6",
+  "version": "1.1.8",
   "private": true,
   "type": "module",
   "displayName": {
@@ -316,22 +316,21 @@
               "ru_RU": "Min likes"
             },
             "hint": {
-              "en_US": "Optional; e.g. 100",
-              "zh_CN": "可选，例如 100",
-              "zh_TW": "可選，例如 100",
-              "ja_JP": "Optional; e.g. 100",
-              "ko_KR": "Optional; e.g. 100",
-              "th_TH": "Optional; e.g. 100",
-              "id_ID": "Optional; e.g. 100",
-              "ms_MY": "Optional; e.g. 100",
-              "vi_VN": "Optional; e.g. 100",
-              "de_DE": "Optional; e.g. 100",
-              "es_ES": "Optional; e.g. 100",
-              "pt_BR": "Optional; e.g. 100",
-              "fr_FR": "Optional; e.g. 100",
-              "ru_RU": "Optional; e.g. 100"
+              "en_US": "Leave blank for no limit",
+              "zh_CN": "留空表示不限制",
+              "zh_TW": "留空表示不限制",
+              "ja_JP": "Leave blank for no limit",
+              "ko_KR": "Leave blank for no limit",
+              "th_TH": "Leave blank for no limit",
+              "id_ID": "Leave blank for no limit",
+              "ms_MY": "Leave blank for no limit",
+              "vi_VN": "Leave blank for no limit",
+              "de_DE": "Leave blank for no limit",
+              "es_ES": "Leave blank for no limit",
+              "pt_BR": "Leave blank for no limit",
+              "fr_FR": "Leave blank for no limit",
+              "ru_RU": "Leave blank for no limit"
             },
-            "inputType": "number",
             "defaultValue": ""
           },
           {
@@ -354,22 +353,21 @@
               "ru_RU": "Max likes"
             },
             "hint": {
-              "en_US": "Optional; e.g. 100000",
-              "zh_CN": "可选，例如 100000",
-              "zh_TW": "可選，例如 100000",
-              "ja_JP": "Optional; e.g. 100000",
-              "ko_KR": "Optional; e.g. 100000",
-              "th_TH": "Optional; e.g. 100000",
-              "id_ID": "Optional; e.g. 100000",
-              "ms_MY": "Optional; e.g. 100000",
-              "vi_VN": "Optional; e.g. 100000",
-              "de_DE": "Optional; e.g. 100000",
-              "es_ES": "Optional; e.g. 100000",
-              "pt_BR": "Optional; e.g. 100000",
-              "fr_FR": "Optional; e.g. 100000",
-              "ru_RU": "Optional; e.g. 100000"
+              "en_US": "Leave blank for no limit",
+              "zh_CN": "留空表示不限制",
+              "zh_TW": "留空表示不限制",
+              "ja_JP": "Leave blank for no limit",
+              "ko_KR": "Leave blank for no limit",
+              "th_TH": "Leave blank for no limit",
+              "id_ID": "Leave blank for no limit",
+              "ms_MY": "Leave blank for no limit",
+              "vi_VN": "Leave blank for no limit",
+              "de_DE": "Leave blank for no limit",
+              "es_ES": "Leave blank for no limit",
+              "pt_BR": "Leave blank for no limit",
+              "fr_FR": "Leave blank for no limit",
+              "ru_RU": "Leave blank for no limit"
             },
-            "inputType": "number",
             "defaultValue": ""
           }
         ]

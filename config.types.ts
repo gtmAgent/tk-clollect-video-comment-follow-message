@@ -7,8 +7,8 @@ export interface WorkflowRunConfig {
   videoFilterKeywords: string;
   videoPublishStart: string;
   videoPublishEnd: string;
-  videoLikeMin: number;
-  videoLikeMax: number;
+  videoLikeMin: string;
+  videoLikeMax: string;
   maxComments: number;
   commentFilterKeywords: string;
   commentPublishStart: string;
