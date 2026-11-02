@@ -1,11 +1,10 @@
 /**
- * 关键词采视频 → 筛选确认 → 循环：采评论 → 去重 → 筛选确认 → 关注+私信（直到取消）
- * 同类型子任务并行入队。
+ * 关键词采视频 → 筛选 → 循环：采评论 → 去重 → 筛选 → 关注+私信（手动停止前持续）
+ * 同类型子任务并行入队；无人工确认。
  */
 import { join } from 'node:path';
 import type { WorkflowRunConfig } from './config.types';
 import {
-  batchCheckpointButtons,
   loadWorkflowManifest,
   loadWorkflowRunConfig,
   type AutomationRunResult,
@@ -107,12 +106,6 @@ function normalizeUrl(url: string): string {
   } catch {
     return raw.replace(/\/$/, '').toLowerCase();
   }
-}
-
-function clip(s: string, n: number): string {
-  const t = s.replace(/\s+/g, ' ').trim();
-  if (t.length <= n) return t;
-  return `${t.slice(0, n)}…`;
 }
 
 function hasAnyFilter(
@@ -759,51 +752,22 @@ async function runWorkflow(ctx: WorkflowContext, cfg: WorkflowRunConfig): Promis
     );
   }
 
-  // —— 2) 人工确认视频 ——
-  const likeHint = skippedLikeFilterForEmpty
-    ? ` 注意：采集点赞全部为空，已自动跳过点赞条件，仅按关键词/时间筛出 ${filteredVideoRows.length} 条。`
-    : emptyLikes > 0
-      ? ` 注意：采集中有 ${emptyLikes}/${collected.rows.length} 条点赞为空。`
-      : '';
-  ctx.workflowLog(`humanConfirm videos options=${filteredVideoRows.length}`);
-  const videoPick = await ctx.humanConfirm({
-    scenario: 'media_pick_many',
-    title: '确认要采集评论的视频',
-    message: `筛选命中 ${filteredVideoRows.length} 条（子任务报 ${videoMatched.childMatch}）。请至少选 1 条；若不在详情页请看底部确认浮层。${likeHint}`,
-    options: filteredVideoRows.map((r, i) => ({
-      id: `v-${i}`,
-      label: clip(r.caption || r.videoUrl || `视频 ${i + 1}`, 80),
-      description: clip(
-        `${r.likeCount ? `赞 ${r.likeCount} · ` : ''}${r.publishDate ? `${r.publishDate} · ` : ''}${r.videoUrl}`,
-        160,
-      ),
-      mediaType: 'text' as const,
-    })),
-    buttons: {
-      confirm: '用所选视频采评论',
-      cancel: '结束并保留已处理结果',
-    },
-    selection: { mode: 'multiple', min: 1, max: filteredVideoRows.length },
-  });
-  ctx.workflowLog(`humanConfirm videos type=${videoPick.type}`);
-  if (videoPick.type !== 'approved') {
-    return finish(true, videoPick.type === 'cancelled' ? '已取消：未确认视频，保留当前进度' : videoPick.msg);
+  // —— 2) 筛选命中视频全部进入采评论（无人工确认）——
+  if (skippedLikeFilterForEmpty) {
+    ctx.workflowLog(
+      `auto videos=${filteredVideoRows.length} (likes empty, like filter skipped; childMatch=${videoMatched.childMatch})`,
+    );
+  } else {
+    ctx.workflowLog(
+      `auto videos=${filteredVideoRows.length} emptyLikes=${emptyLikes} childMatch=${videoMatched.childMatch}`,
+    );
   }
-  const selectedVideos = videoPick.selectedOptionIds
-    .map((id) => {
-      const m = /^v-(\d+)$/.exec(id);
-      if (!m) return '';
-      return filteredVideoRows[Number(m[1])]?.videoUrl ?? '';
-    })
-    .filter(Boolean);
+  const selectedVideos = filteredVideoRows.map((r) => r.videoUrl).filter(Boolean);
   selectedVideoCount = selectedVideos.length;
-  if (selectedVideos.length === 0) {
-    return finish(true, '未选择视频，已结束');
-  }
 
   const seenProfiles = new Set<string>();
 
-  // —— 3) 循环：评论 → 去重 → 筛选确认 → 关注私信 ——
+  // —— 3) 循环：评论 → 去重 → 筛选 → 关注私信（手动停止前持续）——
   for (let round = 1; ; round++) {
     roundCount = round;
     ctx.workflowLog(`=== round ${round} ===`);
@@ -829,31 +793,14 @@ async function runWorkflow(ctx: WorkflowContext, cfg: WorkflowRunConfig): Promis
       `round ${round}: collected=${commentCollected.rows.length} fresh=${fresh.length} seen=${seenProfiles.size}`,
     );
 
-    // 无新主页：明确告知，不要冒充「筛选后确认」
     if (fresh.length === 0) {
-      const noFresh = await ctx.humanConfirm({
-        scenario: 'batch_checkpoint',
-        title: `第 ${round} 轮：无新用户可筛选`,
-        message: `本轮采集 ${commentCollected.rows.length} 条评论，去重后 0 个新主页（均已在历史轮次出现过），因此跳过筛选与确认。累计确认用户 ${newUserCount}。`,
-        buttons: batchCheckpointButtons({
-          continueNext: '等待后继续下一轮',
-          stop: '结束并保留已处理结果',
-        }),
-      });
-      if (noFresh.actionId === 'stop' || noFresh.type === 'cancelled' || noFresh.type === 'failed') {
-        return finish(
-          true,
-          noFresh.type === 'failed'
-            ? noFresh.msg
-            : `已结束：完成 ${roundCount} 轮，确认用户 ${newUserCount}，关注 ${followOkCount}，私信 ${dmOkCount}`,
-        );
-      }
-      ctx.workflowLog(`sleep ${intervalMinutes} minutes before next round`);
+      ctx.workflowLog(
+        `round ${round}: no fresh profiles; sleep ${intervalMinutes}m then next round (users=${newUserCount})`,
+      );
       await Bun.sleep(intervalMinutes * 60 * 1000);
       continue;
     }
 
-    // —— 必须先筛选，再弹「用户确认」——
     const collectTime = new Date().toISOString().replace('T', ' ').slice(0, 19);
     const commentTsvText = [
       COMMENT_HEADERS.join('\t'),
@@ -898,66 +845,16 @@ async function runWorkflow(ctx: WorkflowContext, cfg: WorkflowRunConfig): Promis
     );
 
     if (candidates.length === 0) {
-      const zero = await ctx.humanConfirm({
-        scenario: 'batch_checkpoint',
-        title: `第 ${round} 轮：评论筛选命中 0 人`,
-        message: `去重新主页 ${fresh.length} 人，按你的评论筛选条件命中 0 人，未进入关注私信。请放宽评论关键词/时间后再试。累计确认用户 ${newUserCount}。`,
-        buttons: batchCheckpointButtons({
-          continueNext: '等待后继续下一轮',
-          stop: '结束并保留已处理结果',
-        }),
-      });
-      if (zero.actionId === 'stop' || zero.type === 'cancelled' || zero.type === 'failed') {
-        return finish(
-          true,
-          zero.type === 'failed'
-            ? zero.msg
-            : `已结束：完成 ${roundCount} 轮，确认用户 ${newUserCount}，关注 ${followOkCount}，私信 ${dmOkCount}`,
-        );
-      }
-      ctx.workflowLog(`sleep ${intervalMinutes} minutes before next round`);
+      ctx.workflowLog(
+        `round ${round}: comment filter hit 0; sleep ${intervalMinutes}m then next round (users=${newUserCount})`,
+      );
       await Bun.sleep(intervalMinutes * 60 * 1000);
       continue;
     }
 
-    ctx.workflowLog(`humanConfirm users options=${candidates.length}`);
-    const userPick = await ctx.humanConfirm({
-      scenario: 'media_pick_many',
-      title: `第 ${round} 轮：确认筛选后的用户`,
-      message: `已完成评论筛选：去重 ${fresh.length} → 命中 ${candidates.length} 人（子任务报 ${commentMatched.childMatch}）。请勾选要关注并私信的用户；若不在详情页请看底部确认浮层。`,
-      options: candidates.map((r, i) => ({
-        id: `u-${i}`,
-        label: clip(r.userName || `用户 ${i + 1}`, 80),
-        description: clip(
-          `${r.commentDate ? `${r.commentDate} · ` : ''}${r.commentContent || r.profileUrl}`,
-          160,
-        ),
-        mediaType: 'text' as const,
-      })),
-      buttons: {
-        confirm: '关注并私信所选用户',
-        cancel: '结束并保留已处理结果',
-      },
-      selection: { mode: 'multiple', min: 1, max: candidates.length },
-    });
-    ctx.workflowLog(`humanConfirm users type=${userPick.type}`);
-    if (userPick.type !== 'approved') {
-      return finish(
-        true,
-        userPick.type === 'cancelled'
-          ? `已取消：保留已处理结果（完成 ${roundCount} 轮，新用户 ${newUserCount}）`
-          : userPick.msg,
-      );
-    }
-
-    const selectedUsers = userPick.selectedOptionIds
-      .map((id) => {
-        const m = /^u-(\d+)$/.exec(id);
-        if (!m) return '';
-        return candidates[Number(m[1])]?.profileUrl ?? '';
-      })
-      .filter(Boolean);
+    const selectedUsers = candidates.map((r) => r.profileUrl).filter(Boolean);
     newUserCount += selectedUsers.length;
+    ctx.workflowLog(`round ${round}: auto users=${selectedUsers.length}`);
 
     ctx.workflowLog(`follow parallel x${selectedUsers.length}`);
     const followSteps = await Promise.all(
@@ -993,25 +890,9 @@ async function runWorkflow(ctx: WorkflowContext, cfg: WorkflowRunConfig): Promis
       else ctx.workflowLog(`dm failed host=${selectedUsers[i]}: ${dm.msg}`);
     }
 
-    const next = await ctx.humanConfirm({
-      scenario: 'batch_checkpoint',
-      title: `第 ${round} 轮已完成`,
-      message: `本轮已筛选并处理完毕。累计确认用户 ${newUserCount}，关注成功 ${followOkCount}，私信成功 ${dmOkCount}。继续将等待 ${intervalMinutes} 分钟后再次采集评论。`,
-      buttons: batchCheckpointButtons({
-        continueNext: '等待后继续下一轮',
-        stop: '结束并保留已处理结果',
-      }),
-    });
-    if (next.actionId === 'stop' || next.type === 'cancelled' || next.type === 'failed') {
-      return finish(
-        true,
-        next.type === 'failed'
-          ? next.msg
-          : `已结束：完成 ${roundCount} 轮，确认用户 ${newUserCount}，关注 ${followOkCount}，私信 ${dmOkCount}`,
-      );
-    }
-
-    ctx.workflowLog(`sleep ${intervalMinutes} minutes before next round`);
+    ctx.workflowLog(
+      `round ${round} done users=${newUserCount} followOk=${followOkCount} dmOk=${dmOkCount}; sleep ${intervalMinutes}m`,
+    );
     await Bun.sleep(intervalMinutes * 60 * 1000);
   }
 }

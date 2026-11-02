@@ -1,6 +1,6 @@
 {
   "name": "tk-clollect-video-comment-follow-message",
-  "version": "1.1.8",
+  "version": "1.1.9",
   "private": true,
   "type": "module",
   "displayName": {
@@ -20,20 +20,20 @@
     "zh_TW": "Tk关键词视频+筛选评论+关注私信"
   },
   "description": {
-    "en_US": "Collect TikTok videos by keyword, filter and confirm, then loop comment scrape with dedupe, confirm users, follow and DM until you stop.",
-    "zh_CN": "按关键词采集视频并筛选确认，循环采集评论（主页去重）、筛选确认用户后关注并私信，直到你取消。",
-    "zh_TW": "按關鍵詞採集影片並篩選確認，循環採集評論（主頁去重）、篩選確認用戶後關注並私信，直到你取消。",
-    "ja_JP": "Collect TikTok videos by keyword, filter and confirm, then loop comment scrape with dedupe, confirm users, follow and DM until you stop.",
-    "ko_KR": "Collect TikTok videos by keyword, filter and confirm, then loop comment scrape with dedupe, confirm users, follow and DM until you stop.",
-    "th_TH": "Collect TikTok videos by keyword, filter and confirm, then loop comment scrape with dedupe, confirm users, follow and DM until you stop.",
-    "id_ID": "Collect TikTok videos by keyword, filter and confirm, then loop comment scrape with dedupe, confirm users, follow and DM until you stop.",
-    "ms_MY": "Collect TikTok videos by keyword, filter and confirm, then loop comment scrape with dedupe, confirm users, follow and DM until you stop.",
-    "vi_VN": "Collect TikTok videos by keyword, filter and confirm, then loop comment scrape with dedupe, confirm users, follow and DM until you stop.",
-    "de_DE": "Collect TikTok videos by keyword, filter and confirm, then loop comment scrape with dedupe, confirm users, follow and DM until you stop.",
-    "es_ES": "Collect TikTok videos by keyword, filter and confirm, then loop comment scrape with dedupe, confirm users, follow and DM until you stop.",
-    "pt_BR": "Collect TikTok videos by keyword, filter and confirm, then loop comment scrape with dedupe, confirm users, follow and DM until you stop.",
-    "fr_FR": "Collect TikTok videos by keyword, filter and confirm, then loop comment scrape with dedupe, confirm users, follow and DM until you stop.",
-    "ru_RU": "Collect TikTok videos by keyword, filter and confirm, then loop comment scrape with dedupe, confirm users, follow and DM until you stop."
+    "en_US": "Collect TikTok videos by keyword, auto-filter, then loop comment scrape with dedupe, follow and DM until you stop the run.",
+    "zh_CN": "按关键词采集视频并自动筛选，循环采集评论（主页去重）、筛选后自动关注并私信，直到你手动停止。",
+    "zh_TW": "按關鍵詞採集影片並自動篩選，循環採集評論（主頁去重）、篩選後自動關注並私信，直到你手動停止。",
+    "ja_JP": "Collect TikTok videos by keyword, auto-filter, then loop comment scrape with dedupe, follow and DM until you stop the run.",
+    "ko_KR": "Collect TikTok videos by keyword, auto-filter, then loop comment scrape with dedupe, follow and DM until you stop the run.",
+    "th_TH": "Collect TikTok videos by keyword, auto-filter, then loop comment scrape with dedupe, follow and DM until you stop the run.",
+    "id_ID": "Collect TikTok videos by keyword, auto-filter, then loop comment scrape with dedupe, follow and DM until you stop the run.",
+    "ms_MY": "Collect TikTok videos by keyword, auto-filter, then loop comment scrape with dedupe, follow and DM until you stop the run.",
+    "vi_VN": "Collect TikTok videos by keyword, auto-filter, then loop comment scrape with dedupe, follow and DM until you stop the run.",
+    "de_DE": "Collect TikTok videos by keyword, auto-filter, then loop comment scrape with dedupe, follow and DM until you stop the run.",
+    "es_ES": "Collect TikTok videos by keyword, auto-filter, then loop comment scrape with dedupe, follow and DM until you stop the run.",
+    "pt_BR": "Collect TikTok videos by keyword, auto-filter, then loop comment scrape with dedupe, follow and DM until you stop the run.",
+    "fr_FR": "Collect TikTok videos by keyword, auto-filter, then loop comment scrape with dedupe, follow and DM until you stop the run.",
+    "ru_RU": "Collect TikTok videos by keyword, auto-filter, then loop comment scrape with dedupe, follow and DM until you stop the run."
   },
   "main": "./main.ts",
   "dependencies": {
@@ -669,20 +669,20 @@
               "ru_RU": "Interval between rounds (minutes)"
             },
             "hint": {
-              "en_US": "After each round, wait this many minutes then scrape comments again until you stop",
-              "zh_CN": "每轮结束后等待该分钟数，再采评论；直到你在确认处结束",
-              "zh_TW": "每輪結束後等待該分鐘數，再採評論；直到你在確認處結束",
-              "ja_JP": "After each round, wait this many minutes then scrape comments again until you stop",
-              "ko_KR": "After each round, wait this many minutes then scrape comments again until you stop",
-              "th_TH": "After each round, wait this many minutes then scrape comments again until you stop",
-              "id_ID": "After each round, wait this many minutes then scrape comments again until you stop",
-              "ms_MY": "After each round, wait this many minutes then scrape comments again until you stop",
-              "vi_VN": "After each round, wait this many minutes then scrape comments again until you stop",
-              "de_DE": "After each round, wait this many minutes then scrape comments again until you stop",
-              "es_ES": "After each round, wait this many minutes then scrape comments again until you stop",
-              "pt_BR": "After each round, wait this many minutes then scrape comments again until you stop",
-              "fr_FR": "After each round, wait this many minutes then scrape comments again until you stop",
-              "ru_RU": "After each round, wait this many minutes then scrape comments again until you stop"
+              "en_US": "After each round, wait this many minutes then scrape comments again until you manually stop",
+              "zh_CN": "每轮结束后等待该分钟数，再采评论；直到你手动停止任务",
+              "zh_TW": "每輪結束後等待該分鐘數，再採評論；直到你手動停止任務",
+              "ja_JP": "After each round, wait this many minutes then scrape comments again until you manually stop",
+              "ko_KR": "After each round, wait this many minutes then scrape comments again until you manually stop",
+              "th_TH": "After each round, wait this many minutes then scrape comments again until you manually stop",
+              "id_ID": "After each round, wait this many minutes then scrape comments again until you manually stop",
+              "ms_MY": "After each round, wait this many minutes then scrape comments again until you manually stop",
+              "vi_VN": "After each round, wait this many minutes then scrape comments again until you manually stop",
+              "de_DE": "After each round, wait this many minutes then scrape comments again until you manually stop",
+              "es_ES": "After each round, wait this many minutes then scrape comments again until you manually stop",
+              "pt_BR": "After each round, wait this many minutes then scrape comments again until you manually stop",
+              "fr_FR": "After each round, wait this many minutes then scrape comments again until you manually stop",
+              "ru_RU": "After each round, wait this many minutes then scrape comments again until you manually stop"
             },
             "inputType": "number",
             "defaultValue": 60
@@ -733,40 +733,40 @@
             "key": "selectedVideoCount",
             "type": "stat",
             "label": {
-              "en_US": "Confirmed videos",
-              "zh_CN": "确认视频数",
-              "zh_TW": "確認影片數",
-              "ja_JP": "Confirmed videos",
-              "ko_KR": "Confirmed videos",
-              "th_TH": "Confirmed videos",
-              "id_ID": "Confirmed videos",
-              "ms_MY": "Confirmed videos",
-              "vi_VN": "Confirmed videos",
-              "de_DE": "Confirmed videos",
-              "es_ES": "Confirmed videos",
-              "pt_BR": "Confirmed videos",
-              "fr_FR": "Confirmed videos",
-              "ru_RU": "Confirmed videos"
+              "en_US": "Filtered videos",
+              "zh_CN": "筛选视频数",
+              "zh_TW": "篩選影片數",
+              "ja_JP": "Filtered videos",
+              "ko_KR": "Filtered videos",
+              "th_TH": "Filtered videos",
+              "id_ID": "Filtered videos",
+              "ms_MY": "Filtered videos",
+              "vi_VN": "Filtered videos",
+              "de_DE": "Filtered videos",
+              "es_ES": "Filtered videos",
+              "pt_BR": "Filtered videos",
+              "fr_FR": "Filtered videos",
+              "ru_RU": "Filtered videos"
             }
           },
           {
             "key": "newUserCount",
             "type": "stat",
             "label": {
-              "en_US": "Confirmed users (all rounds)",
-              "zh_CN": "确认用户数（累计）",
-              "zh_TW": "確認用戶數（累計）",
-              "ja_JP": "Confirmed users (all rounds)",
-              "ko_KR": "Confirmed users (all rounds)",
-              "th_TH": "Confirmed users (all rounds)",
-              "id_ID": "Confirmed users (all rounds)",
-              "ms_MY": "Confirmed users (all rounds)",
-              "vi_VN": "Confirmed users (all rounds)",
-              "de_DE": "Confirmed users (all rounds)",
-              "es_ES": "Confirmed users (all rounds)",
-              "pt_BR": "Confirmed users (all rounds)",
-              "fr_FR": "Confirmed users (all rounds)",
-              "ru_RU": "Confirmed users (all rounds)"
+              "en_US": "Processed users (all rounds)",
+              "zh_CN": "处理用户数（累计）",
+              "zh_TW": "處理用戶數（累計）",
+              "ja_JP": "Processed users (all rounds)",
+              "ko_KR": "Processed users (all rounds)",
+              "th_TH": "Processed users (all rounds)",
+              "id_ID": "Processed users (all rounds)",
+              "ms_MY": "Processed users (all rounds)",
+              "vi_VN": "Processed users (all rounds)",
+              "de_DE": "Processed users (all rounds)",
+              "es_ES": "Processed users (all rounds)",
+              "pt_BR": "Processed users (all rounds)",
+              "fr_FR": "Processed users (all rounds)",
+              "ru_RU": "Processed users (all rounds)"
             }
           },
           {
@@ -857,7 +857,7 @@
         "fr_FR": "Keyword → comments → follow & DM",
         "ru_RU": "Keyword → comments → follow & DM"
       },
-      "mermaid": "flowchart TD\n  start([填写关键词与筛选]) --> collectVid[并行采集关键词视频]\n  collectVid --> filterVid[筛选视频]\n  filterVid --> confirmVid{确认视频多选}\n  confirmVid -->|取消| doneEarly([保留进度结束])\n  confirmVid -->|确认| loopStart[并行采集视频评论]\n  loopStart --> dedupe[主页链接去重]\n  dedupe --> filterCmt[必须先筛选评论]\n  filterCmt --> confirmUser{确认筛选后用户}\n  confirmUser -->|取消| doneKeep([保留已处理结果])\n  confirmUser -->|确认| follow[并行批量关注]\n  follow --> dm[并行批量私信]\n  dm --> more{继续下一轮}\n  more -->|结束| doneKeep\n  more -->|等待间隔分钟| loopStart"
+      "mermaid": "flowchart TD\n  start([填写关键词与筛选]) --> collectVid[并行采集关键词视频]\n  collectVid --> filterVid[筛选视频]\n  filterVid --> loopStart[并行采集视频评论]\n  loopStart --> dedupe[主页链接去重]\n  dedupe --> filterCmt[筛选评论]\n  filterCmt --> follow[并行批量关注]\n  follow --> dm[并行批量私信]\n  dm --> wait[等待间隔分钟]\n  wait --> loopStart"
     }
   }
 }
